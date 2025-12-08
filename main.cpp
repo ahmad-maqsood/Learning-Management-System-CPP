@@ -4,6 +4,8 @@ Made with Hands.
 Project Name : Learning Management System
 8 Dec, 2025.
 
+Presenters : AHMAD MAQSOOD(2024-ag-8790)  &&  MOIZ AFTAB(2024-ag-9203)  &&  AHMED ILYAS(2024-ag-8958)
+
 Students' Recovery Keys : 2024ag8790 , 2024ag9203 , 2024ag8958
 
 To access admin account, enter this info on the very first interface :-
