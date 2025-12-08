@@ -87,6 +87,7 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
     }
 
     // -------------New Account Function -------------
+
     void newAccount(){
 
         string welUser,welCnic, welPass, welAgNum;
@@ -170,134 +171,138 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
     }
     
     //-------------Existing Account(s) Function-------------
-    void existingAccount(){
-        
-    string inUser, inPass;
-    bool loginSucess = false;
-    int loginAttempts = 0; //To count wrong login attempts
-    
-    retryEA:
-    cout<<"----------Login----------"<<endl;
-    
-    cout<<"Username (AG#/CNIC#) : ";
-    getline(cin, inUser);
-    
-    cout<<"Enter your Password : ";
-    getline(cin, inPass);
 
-    if(inUser == "" || inPass == ""){
-
-        cout<<"Username and Password are necessary. Try Again."<<endl;
-        goto retryEA;
-    }
-    
-    for(int i=0; i <= existingStds.size() - 1 ; i++){  // -1 >> Because indexes start from 0
+    bool existingAccount(){
         
-        if( (inUser == existingAgNums[i] && inPass == existingPasswords[i]) || (inUser == existingCnics[i] && inPass == existingPasswords[i]) ){
-            
-            stdName = existingStds[i];
-            stdAgNum = existingAgNums[i];
-            stdCNIC = existingCnics[i];
-            stdPassword = existingPasswords[i];
-            loginSucess = true;
-            cout<<"Login Sucessful!"<<endl;
-            cout<<"--------------------"<<endl;
+        string inUser, inPass;
+        bool loginSucess = false;
+        int loginAttempts = 0; //To count wrong login attempts
+        
+        retryEA:
+        cout<<"----------Login----------"<<endl;
+        
+        cout<<"Username (AG#/CNIC#) : ";
+        getline(cin, inUser);
+        
+        cout<<"Enter your Password : ";
+        getline(cin, inPass);
+
+        if(inUser == "" || inPass == ""){
+
+            cout<<"Username and Password are necessary. Try Again."<<endl;
+            goto retryEA;
         }
-    }
     
-    if(!loginSucess){   //Counts the login attempts and gives the option to reset password or try again
-        cout<<"Invalid Credentials. Try Again."<<endl;
-        loginAttempts++;
-        
-        if(loginAttempts >= 3){  
-            
-            retryLFC:
-            string loginFailChoice;
-            cout<<"--------------------"<<endl;
-            cout<<"Forgot Password?"<<endl;
-            cout<<"1. Yes"<<endl;
-            cout<<"2. No"<<endl;
-            cout<<"Input(1-2) : ";
-            cin>>loginFailChoice;
-            cout<<"--------------------"<<endl;
-            
-            if(loginFailChoice == "1"){
-                
-                retryLFC1:
-                system("cls");
-                cout<<"----------Forgot Password-----------"<<endl;
-                bool validAgNum = false;
-                
-                string agNumFP,recoveryKey;
-                cout<<"Enter your AG# : ";
-                cin>>agNumFP;
-                
-                for(int i=0; i <= existingStds.size() - 1; i++){
+        for(int i=0; i <= existingStds.size() - 1 ; i++){  // -1 >> Because indexes start from 0
 
-                    if(agNumFP == existingAgNums[i]){
+            if( (inUser == existingAgNums[i] && inPass == existingPasswords[i]) || (inUser == existingCnics[i] && inPass == existingPasswords[i]) ){
 
-                        validAgNum = true;
-                    }
-                }
-                
-                if(!validAgNum){
-                    
-                    cout<<"Invalid AG#. Please Enter a Valid AG#."<<endl;
-                    goto retryLFC1;
-                }
-
-                cout<<"Enter the Recovery Key : ";
-                cin>>recoveryKey;
+                stdName = existingStds[i];
+                stdAgNum = existingAgNums[i];
+                stdCNIC = existingCnics[i];
+                stdPassword = existingPasswords[i];
+                loginSucess = true;
+                cout<<"Login Sucessful!"<<endl;
+                return true;
                 cout<<"--------------------"<<endl;
+            }
+        }
+    
+        if(!loginSucess){   //Counts the login attempts and gives the option to reset password or try again
 
-                if(recoveryKey == "2024ag8790" || recoveryKey == "2024ag9203"  || recoveryKey == "2024ag8958"){
+            cout<<"Invalid Credentials. Try Again."<<endl;
+            loginAttempts++;
+
+            if(loginAttempts >= 3){  
+
+                retryLFC:
+                string loginFailChoice;
+                cout<<"--------------------"<<endl;
+                cout<<"Maximum Login Attempts Reached. Please Select an Option :-"<<endl;
+                cout<<"1. Reset Password"<<endl;
+                cout<<"2. Go Back to the Previous Page."<<endl;
+                cout<<"Input(1-2) : ";
+                cin>>loginFailChoice;
+                cout<<"--------------------"<<endl;
+            
+                if(loginFailChoice == "1"){
+
+                    retryLFC1:
+                    system("cls");
+                    cout<<"----------Forgot Password-----------"<<endl;
+                    bool validAgNum = false;
                     
-                    retryNewP:
-                    string newPass;
-                    cout<<"Enter New Password(Without Blank Spaces) : ";
-                    cin>>newPass;
-
-                    if(newPass.length() < 5){
-                        
-                        cout<<"Password length must be of at least 5 Digits."<<endl;
-                        goto retryNewP;
-                    }
-
+                    string agNumFP,recoveryKey;
+                    cout<<"Enter your AG# : ";
+                    cin>>agNumFP;
+                    
                     for(int i=0; i <= existingStds.size() - 1; i++){
-
+                        
                         if(agNumFP == existingAgNums[i]){
-
-                            existingPasswords[i] = newPass;
+                            
+                            validAgNum = true;
                         }
                     }
-                    cout<<"Password Changed Succesfully."<<endl;
-                    cin.ignore();
-                    goto retryEA;
-                }
-                else{
                     
-                    cout<<"Invalid Recovery Key."<<endl;
-                    cin.ignore();
+                    if(!validAgNum){
+                        
+                        cout<<"Invalid AG#. Please Enter a Valid AG#."<<endl;
+                        goto retryLFC1;
+                    }
+                    
+                    cout<<"Enter the Recovery Key : ";
+                    cin>>recoveryKey;
+                    cout<<"--------------------"<<endl;
+                    
+                    if(recoveryKey == "2024ag8790" || recoveryKey == "2024ag9203"  || recoveryKey == "2024ag8958"){
+                        
+                        retryNewP:
+                        string newPass;
+                        cout<<"Enter New Password(Without Blank Spaces) : ";
+                        cin>>newPass;
+                        
+                        if(newPass.length() < 5){
+                            
+                            cout<<"Password length must be of at least 5 Digits."<<endl;
+                            goto retryNewP;
+                        }
+                        
+                        for(int i=0; i <= existingStds.size() - 1; i++){
+                            
+                            if(agNumFP == existingAgNums[i]){
+
+                                existingPasswords[i] = newPass;
+                            }
+                        }
+                        cout<<"Password Changed Succesfully."<<endl;
+                        return false;
+                    }
+                    else{
+                    
+                        cout<<"Invalid Recovery Key."<<endl;
+                        return false;
+                    }
+                }
+                else if(loginFailChoice == "2"){
+                
+                    system("cls");
+                    return false;
+                }   
+                else{
+                
+                    cout<<"Invalid Input. Try Again"<<endl;
+                    goto retryLFC;
+                    cout<<"--------------------"<<endl;
                 }
             }
-            else if(loginFailChoice == "2"){
-                
-                system("cls");
-                cin.ignore();
-                goto retryEA;
-            }   
             else{
-                
-                cout<<"Invalid Input. Try Again"<<endl;
-                goto retryLFC;
-                cout<<"--------------------"<<endl;
+   
+                goto retryEA;
             }
         }
- 
-        goto retryEA;
-    }
 
     }
+
 };
 
 class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
@@ -1069,10 +1074,10 @@ class stdPortal : public adminPortal{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STUDENT 
         cout<<"Just give it up already."<<endl;
         cout<<"--------------------"<<endl;
     }
-
+    
     //================Dectructor=====================
     ~stdPortal(){
-
+        
         cout<<"YOU CAN CLOSE THE WINDOW NOW."<<endl;
     }
     
@@ -1081,7 +1086,7 @@ class stdPortal : public adminPortal{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STUDENT 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<CLASSES ENDING HERE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
-
+    
     stdPortal obj;
     
     //------------- WELCOME PART -------------
@@ -1091,30 +1096,54 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
     bool accountAccess = false;
     bool stdPortalAccess = false;
     bool adminPortalAccess = false;
-
+    
     while(!accountAccess){
         
         cout<<"Select an option : "<<endl;
         cout<<"1. Create a New Account."<<endl;
         cout<<"2. Login to an Existing Account."<<endl;
         cout<<"3. Exit."<<endl;
-    
+        
         cout<<"Input(1-3) : ";
         cin>>userChoiceMF;
-
+        
         system("cls");
         
         if(userChoiceMF == "1"){
             
-            cin.ignore();
-            obj.newAccount();  //New Account
+            string continueChoiceNA;
+            cout<<"Do you want to create a New Account?"<<endl;
+            cout<<"Press Y to continue or any other key to go back : ";
+            cin>>continueChoiceNA;
+            
+            if(continueChoiceNA == "Y" || continueChoiceNA == "y"){
+                
+                cin.ignore();
+                obj.newAccount();  //New Account
+            }
+            else{
+                
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the previous Page."<<endl;
+                cout<<"--------------------"<<endl;
+            }
         }
         else if(userChoiceMF == "2"){
-
+            
             cin.ignore();   
-            obj.existingAccount();   //Student LOGIN
-            accountAccess = true;
-            stdPortalAccess = true;
+            bool accLoginResult = obj.existingAccount();   //Student LOGIN
+            
+            if(accLoginResult){
+                
+                accountAccess = true;
+                stdPortalAccess = true;
+            }
+            else{
+                
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the Previous Page."<<endl;
+                cout<<"--------------------"<<endl;
+            }
         }
         else if(userChoiceMF == "3"){
             
