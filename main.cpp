@@ -397,29 +397,34 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
         cout<<"Your Password is : *****"<<endl;
         cout<<"--------------------"<<endl;
         
-        retryAI:
-        string choiceAI;
-        cout<<"Press R to Reveal your Password. N to Continue."<<endl;
-        cout<<"Input : ";
-        cin>>choiceAI;
-        
-        if(choiceAI == "R" || choiceAI == "r"){
+        bool passRevealLoop = true;
+
+        while(passRevealLoop){
+
+            string choiceAI;
+            cout<<"Press R to Reveal your Password. N to Continue."<<endl;
+            cout<<"Input : ";
+            cin>>choiceAI;
             
-            cout<<"Your Password is : "<<adminPass<<endl;
-            
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the Menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else if(choiceAI == "N" || choiceAI == "n"){
-            
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the Menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else{
-            cout<<"Invalid Input. Try Again."<<endl;
-            goto retryAI;
+            if(choiceAI == "R" || choiceAI == "r"){
+                
+                cout<<"Your Password is : "<<adminPass<<endl;
+                
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the Menu."<<endl;
+                cout<<"--------------------"<<endl;
+                passRevealLoop = false;
+            }
+            else if(choiceAI == "N" || choiceAI == "n"){
+                
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the Menu."<<endl;
+                cout<<"--------------------"<<endl;
+                passRevealLoop = false;
+            }
+            else{
+                cout<<"Invalid Input. Try Again."<<endl;
+            }
         }
     }
     
@@ -427,81 +432,87 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
     
     void adminStudentsInfo(){
         
+        bool stdInfMenuLoop = true;
         retryASI:
-        cout<<"----------View Students' Info----------"<<endl;
-        string choiceASI;
-        cout<<"Please Select an Option :- "<<endl;
-        cout<<"1. See All Students' Info."<<endl;
-        cout<<"2. See a Specific Student's Info."<<endl;
-        cout<<"3. Go back to the Menu"<<endl;
-        
-        cout<<"Input : ";
-        cin>>choiceASI;
-        cout<<"--------------------"<<endl;
-        
-        if(choiceASI == "1"){
-            
-            for(int i=0; i<= existingStds.size() - 1 ; i++){
+        while(stdInfMenuLoop){
 
-                cout<<"================Student # "<<i+1<<"================"<<endl;
-                cout<<"Student Name : "<<existingStds[i]<<" || ";
-                cout<<"Student CNIC# : "<<existingCnics[i]<<" || ";
-                cout<<"Student Password : "<<existingPasswords[i]<<" || ";
-                cout<<"Student AG# : "<<existingAgNums[i]<<" || ";
-                cout<<"Student GPA(2nd Sem) : "<<studentGPAs[i]<<" || ";
-                cout<<"Student CGPA : "<<studentCGPAs[i]<<endl;
-            }
-            cout<<"==========================================================="<<endl;
-            cout<<"Total Number of Students : "<<existingStds.size()<<endl;
-            cout<<"==========================================================="<<endl;
+            cout<<"----------View Students' Info----------"<<endl;
+            string choiceASI;
+            cout<<"Please Select an Option :- "<<endl;
+            cout<<"1. See All Students' Info."<<endl;
+            cout<<"2. See a Specific Student's Info."<<endl;
+            cout<<"3. Go back to the Menu"<<endl;
             
+            cout<<"Input : ";
+            cin>>choiceASI;
             cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the Menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }  
-        else if(choiceASI == "2"){
             
-            string userChoiceASI;
-            cout<<"Enter the AG# or CNIC# : ";
-            cin>>userChoiceASI;
-            
-            bool stdFound = false;
-
-            for(int i=0; i <= existingStds.size() - 1 ; i++){
+            if(choiceASI == "1"){
                 
-                if(userChoiceASI == existingCnics[i] || userChoiceASI == existingAgNums[i]){
+                for(int i=0; i<= existingStds.size() - 1 ; i++){
                     
-                    cout<<"==========================================================="<<endl;
+                    cout<<"================Student # "<<i+1<<"================"<<endl;
                     cout<<"Student Name : "<<existingStds[i]<<" || ";
                     cout<<"Student CNIC# : "<<existingCnics[i]<<" || ";
                     cout<<"Student Password : "<<existingPasswords[i]<<" || ";
                     cout<<"Student AG# : "<<existingAgNums[i]<<" || ";
                     cout<<"Student GPA(2nd Sem) : "<<studentGPAs[i]<<" || ";
                     cout<<"Student CGPA : "<<studentCGPAs[i]<<endl;
-                    cout<<"==========================================================="<<endl;
-                    stdFound = true;
                 }
-            }
-
-            if(!stdFound){
-
-                cout<<"Student Data not Found."<<endl;
-            }
-
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the Menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }     
-        else if(choiceASI == "3"){
+                cout<<"==========================================================="<<endl;
+                cout<<"Total Number of Students : "<<existingStds.size()<<endl;
+                cout<<"==========================================================="<<endl;
+                
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the Menu."<<endl;
+                cout<<"--------------------"<<endl;
+                stdInfMenuLoop = false;
+            }  
+            else if(choiceASI == "2"){
+                
+                string userChoiceASI;
+                cout<<"Enter the AG# or CNIC# : ";
+                cin>>userChoiceASI;
+                
+                bool stdFound = false;
+                
+                for(int i=0; i <= existingStds.size() - 1 ; i++){
+                    
+                    if(userChoiceASI == existingCnics[i] || userChoiceASI == existingAgNums[i]){
+                        
+                        cout<<"==========================================================="<<endl;
+                        cout<<"Student Name : "<<existingStds[i]<<" || ";
+                        cout<<"Student CNIC# : "<<existingCnics[i]<<" || ";
+                        cout<<"Student Password : "<<existingPasswords[i]<<" || ";
+                        cout<<"Student AG# : "<<existingAgNums[i]<<" || ";
+                        cout<<"Student GPA(2nd Sem) : "<<studentGPAs[i]<<" || ";
+                        cout<<"Student CGPA : "<<studentCGPAs[i]<<endl;
+                        cout<<"==========================================================="<<endl;
+                        stdFound = true;
+                        stdInfMenuLoop = false;
+                        cout<<"--------------------"<<endl;
+                        cout<<"You are being redirected to the Menu."<<endl;
+                        cout<<"--------------------"<<endl;
+                    }
+                }
+                
+                if(!stdFound){
+                    
+                    cout<<"Student Data not Found."<<endl;
+                }
+            }     
+            else if(choiceASI == "3"){
             
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the Menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }     
-        else{
-            cout<<"Invalid Input. Try Again."<<endl;
-            cout<<"--------------------"<<endl;
-            goto retryASI;
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the Menu."<<endl;
+                cout<<"--------------------"<<endl;
+                stdInfMenuLoop = false;
+            }     
+            else{
+
+                cout<<"Invalid Input. Try Again."<<endl;
+                cout<<"--------------------"<<endl;
+            }
         }
     }
     
@@ -567,95 +578,110 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
             }
         }
 
-        retryEAI:
-        
-        string adminChoiceEAI;
-        cout<<"Please select an Option :- "<<endl;
-        cout<<"1. Edit Admin's Name."<<endl;
-        cout<<"2. Edit Admin's CNIC#."<<endl;
-        cout<<"3. Edit Admin's Password."<<endl;
-        cout<<"4. Edit Admin's AG#."<<endl;
-        cout<<"5. Go back to the Admin Menu."<<endl;
-        cout<<"Input(1-5) : ";
-        cin>>adminChoiceEAI;
-        cout<<"--------------------"<<endl;
-        
-        if(adminChoiceEAI == "1"){
-            
-            cout<<"The Current Name of the Admin is : "<<adminName<<endl;
+        bool adminInfEditMenuLoop = true;
+        while(adminInfEditMenuLoop){
 
-            cin.ignore();
-            string newName;
-            cout<<"Enter new Name : ";
-            getline(cin, newName);
-            
-            adminName = newName;
-            
-            cout<<"Name Updated Successfully."<<endl;
-        }
-        else if(adminChoiceEAI == "2"){
-            
-            retryChngAdCnic:
-            cout<<"The Current Name of the Admin is : "<<adminName<<endl;
-            cout<<"The Current CNIC# of the Admin is : "<<adminCnic<<endl;
-            
-            string newCnic;
-            cout<<"Enter New CNIC#(Without Space) : ";
-            cin>>newCnic;
-
-            if(newCnic.length() != 13){
-
-                cout<<"CNIC# must be of 13 digits."<<endl;
-                cout<<"--------------------"<<endl;
-                goto retryChngAdCnic;
-            }
-
-            adminCnic = newCnic;
-            
-            cout<<"CNIC# Updated Successfully."<<endl;
-        }  
-        else if(adminChoiceEAI == "3"){
-            
-            retryChngAdPass:
-            cout<<"The Current Name of the Admin is : "<<adminName<<endl;
-            cout<<"The Current Password of the Admin is : "<<adminPass<<endl;
-
-            string newPass;
-            cout<<"Enter New Password(Without Space) : ";
-            cin>>newPass;
-
-            if(newPass.length() < 8){
-
-                cout<<"Password must be of at least 8 characters. Try Again"<<endl;
-                cout<<"--------------------"<<endl;
-                goto retryChngAdPass;
-            }
-            
-            adminPass = newPass;
-            
-            cout<<"Password Updated Successfully."<<endl;
-        }
-        else if(adminChoiceEAI == "4"){
-            
-            cout<<"The Current AG# of the Admin is : "<<adminAgNum<<endl;
-            string newAgNum;
-            cout<<"Enter new AG#(Without Dashes) : ";
-            cin>>newAgNum;
-            
-            adminAgNum = newAgNum;
-            
-            cout<<"AG# has been edited Successfully."<<endl;
-        }
-        else if(adminChoiceEAI == "5"){
-            
+            string adminChoiceEAI;
+            cout<<"Please select an Option :- "<<endl;
+            cout<<"1. Edit Admin's Name."<<endl;
+            cout<<"2. Edit Admin's CNIC#."<<endl;
+            cout<<"3. Edit Admin's Password."<<endl;
+            cout<<"4. Edit Admin's AG#."<<endl;
+            cout<<"5. Go back to the Admin Menu."<<endl;
+            cout<<"Input(1-5) : ";
+            cin>>adminChoiceEAI;
             cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else{
             
-            cout<<"Invalid Input. Try Again."<<endl;
-            goto retryEAI;
+            if(adminChoiceEAI == "1"){
+                
+                cout<<"The Current Name of the Admin is : "<<adminName<<endl;
+                
+                cin.ignore();
+                string newName;
+                cout<<"Enter new Name : ";
+                getline(cin, newName);
+                
+                adminName = newName;
+                
+                cout<<"Name Updated Successfully."<<endl;
+                adminInfEditMenuLoop = false;
+            }
+            else if(adminChoiceEAI == "2"){
+                
+                bool validCnic = false;
+                while(!validCnic){
+                    
+                    cout<<"The Current Name of the Admin is : "<<adminName<<endl;
+                    cout<<"The Current CNIC# of the Admin is : "<<adminCnic<<endl;
+                    
+                    string newCnic;
+                    cout<<"Enter New CNIC#(Without Space) : ";
+                    cin>>newCnic;
+                    
+                    if(newCnic.length() != 13){
+                        
+                        cout<<"CNIC# must be of 13 digits."<<endl;
+                        cout<<"--------------------"<<endl;
+                    }
+                    else{
+                        
+                        adminCnic = newCnic;
+                        cout<<"CNIC# Updated Successfully."<<endl;
+                        validCnic = true;
+                        adminInfEditMenuLoop = false;
+                    }
+                    
+                }
+            }  
+            else if(adminChoiceEAI == "3"){
+                
+                bool validPass = false;
+                while(!validPass){
+                    
+                    cout<<"The Current Name of the Admin is : "<<adminName<<endl;
+                    cout<<"The Current Password of the Admin is : "<<adminPass<<endl;
+                    
+                    string newPass;
+                    cout<<"Enter New Password(Without Space) : ";
+                    cin>>newPass;
+                    
+                    if(newPass.length() < 8){
+                        
+                        cout<<"Password must be of at least 8 characters. Try Again"<<endl;
+                        cout<<"--------------------"<<endl;
+                    }
+                    else{
+                        
+                        adminPass = newPass;   
+                        cout<<"Password Updated Successfully."<<endl;
+                        validPass = true;
+                        adminInfEditMenuLoop = false;
+                    }
+                }
+            }
+            else if(adminChoiceEAI == "4"){
+                
+                cout<<"The Current AG# of the Admin is : "<<adminAgNum<<endl;
+                string newAgNum;
+                cout<<"Enter new AG#(Without Dashes) : ";
+                cin>>newAgNum;
+                
+                adminAgNum = newAgNum;
+                
+                cout<<"AG# has been edited Successfully."<<endl;
+                adminInfEditMenuLoop = false;
+            }
+            else if(adminChoiceEAI == "5"){
+                
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the menu."<<endl;
+                cout<<"--------------------"<<endl;
+                adminInfEditMenuLoop = false;
+            }
+            else{
+                
+                cout<<"Invalid Input. Try Again."<<endl;
+            }
         }
     }
     
@@ -663,142 +689,153 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
     
     void editAdStdInfo(){
         
-        retryCASI:
-        cout<<"----------Edit Students' Info :: Admin Portal----------"<<endl;
-
         string agNumCASI, userChoiceCASI;
         bool validAgNum = false;
 
-        cout<<"Enter the Student's AG# : ";
-        cin>>agNumCASI;
+        while(!validAgNum){
 
-        for(int i=0; i <= existingStds.size() - 1 ; i++){
-
-            if(agNumCASI == existingAgNums[i]){
-
-                validAgNum = true;
-            }
+            cout<<"----------Edit Students' Info :: Admin Portal----------"<<endl;    
+            cout<<"Enter the Student's AG# : ";
+            cin>>agNumCASI;
+            
+            for(int i=0; i <= existingStds.size() - 1 ; i++){
                 
-        }
-
-        if(!validAgNum){
-
-            cout<<"AG# not found."<<endl;
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else if(validAgNum){
-
-            cout<<"--------------------"<<endl;
-            cout<<"Please select an Option :- "<<endl;
-            cout<<"1. Edit Name."<<endl;
-            cout<<"2. Edit CNIC#."<<endl;
-            cout<<"3. Edit Password."<<endl;
-            cout<<"4. Go back to the Menu."<<endl;
-            cout<<"Input(1-3) : ";
-            cin>>userChoiceCASI;
-            cout<<"--------------------"<<endl;
-        
-            if(userChoiceCASI == "1"){   //OPTION 1
-                
-                for(int i=0; i <= existingStds.size() - 1 ; i++){
-                    
-                    if(agNumCASI == existingAgNums[i]){
-                        
-                        cin.ignore();
-                        cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
-                        
-                        string chngName;
-                        cout<<"Edit New Name : ";
-                        getline(cin, chngName);
-                        
-                        existingStds[i] =  chngName;
-                        cout<<"Name Updated Successfully."<<endl;
-                    }
+                if(agNumCASI == existingAgNums[i]){
+                    validAgNum = true;
                 }
                 
+            }
+            if(!validAgNum){
+                
+                cout<<"Invalid AG#."<<endl;
                 cout<<"--------------------"<<endl;
                 cout<<"You are being redirected to the menu."<<endl;
                 cout<<"--------------------"<<endl;
             }
-            else if(userChoiceCASI == "2"){  //OPTION 2
+        }  // WHile loop ending here
+
+        if(validAgNum){
+
+            bool editStdInfoLoop = true;
+            while(editStdInfoLoop){
+
+                cout<<"--------------------"<<endl;
+                cout<<"Please select an Option :- "<<endl;
+                cout<<"1. Edit Name."<<endl;
+                cout<<"2. Edit CNIC#."<<endl;
+                cout<<"3. Edit Password."<<endl;
+                cout<<"4. Go back to the Menu."<<endl;
+                cout<<"Input(1-3) : ";
+                cin>>userChoiceCASI;
+                cout<<"--------------------"<<endl;
                 
-                for(int i=0; i <= existingStds.size() - 1 ; i++){
+                if(userChoiceCASI == "1"){   //OPTION 1
                     
-                    if(agNumCASI == existingAgNums[i]){
+                    for(int i=0; i <= existingStds.size() - 1 ; i++){
                         
-                        bool cnicFormat = false;
-                        
-                        while(!cnicFormat){
+                        if(agNumCASI == existingAgNums[i]){
                             
+                            cin.ignore();
                             cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
-                            cout<<"The Current CNIC# of the Student is : "<<existingCnics[i]<<endl;
                             
-                            string chngCnic;
-                            cout<<"Enter New CNIC# : ";
-                            cin>>chngCnic;
+                            string chngName;
+                            cout<<"Edit New Name : ";
+                            getline(cin, chngName);
                             
-                            if(chngCnic.length() != 13){
-                                
-                                cout<<"CNIC# must be of 13 digits."<<endl;
-                                cout<<"--------------------"<<endl;
-                            }
-                            else{
-                                
-                                existingCnics[i] =  chngCnic;
-                                cout<<"CNIC# Updated Successfully."<<endl;
-                                cnicFormat = true;
-                            }
+                            existingStds[i] =  chngName;
+                            cout<<"Name Updated Successfully."<<endl;
+                            editStdInfoLoop = false;
                         }
                     }
-                }
-                
-                cout<<"--------------------"<<endl;
-                cout<<"You are being redirected to the menu."<<endl;
-                cout<<"--------------------"<<endl;
-            }
-            else if(userChoiceCASI == "3"){  //OPTION 3
-                
-                for(int i=0; i <= existingStds.size() - 1 ; i++){
                     
-                    if(agNumCASI == existingAgNums[i]){
-                        
-                        retryChngStdPass:
-                        cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
-                        cout<<"The Current Password of the Student is : "<<existingPasswords[i]<<endl;
-                        
-                        string chngPass;
-                        cout<<"Edit New Password(No Blank Spaces) : ";
-                        cin>>chngPass;
-                        
-                        if(chngPass.length() < 5){
-                            
-                            cout<<"Password must contain at least 5 characters. Try Again."<<endl;
-                            cout<<"--------------------"<<endl;
-                            goto retryChngStdPass;
-                        }
-                        
-                        existingPasswords[i] =  chngPass;
-                        cout<<"Password Updated Successfully."<<endl;
-                    }
+                    cout<<"--------------------"<<endl;
+                    cout<<"You are being redirected to the menu."<<endl;
+                    cout<<"--------------------"<<endl;
                 }
-                
-                cout<<"--------------------"<<endl;
-                cout<<"You are being redirected to the menu."<<endl;
-                cout<<"--------------------"<<endl;
-            }
-            else if(userChoiceCASI == "4"){
-                
-                cout<<"--------------------"<<endl;
-                cout<<"You are being redirected to the menu."<<endl;
-                cout<<"--------------------"<<endl;
-            }
-            else{
-                
-                cout<<"Invalid Choice. Try Again."<<endl;
-                goto retryCASI;
-            }
+                else if(userChoiceCASI == "2"){  //OPTION 2
+                    
+                    for(int i=0; i <= existingStds.size() - 1 ; i++){
+                        
+                        if(agNumCASI == existingAgNums[i]){
+                            
+                            bool cnicFormat = false;
+                            while(!cnicFormat){
+                                
+                                cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
+                                cout<<"The Current CNIC# of the Student is : "<<existingCnics[i]<<endl;
+                                
+                                string chngCnic;
+                                cout<<"Enter New CNIC# : ";
+                                cin>>chngCnic;
+                                
+                                if(chngCnic.length() != 13){
+                                    
+                                    cout<<"CNIC# must be of 13 digits."<<endl;
+                                    cout<<"--------------------"<<endl;
+                                }
+                                else{
+                                    
+                                    existingCnics[i] =  chngCnic;
+                                    cout<<"CNIC# Updated Successfully."<<endl;
+                                    cnicFormat = true;
+                                    editStdInfoLoop = false;
+                                }
+                            }
+                        }
+                    }
+                    
+                    cout<<"--------------------"<<endl;
+                    cout<<"You are being redirected to the menu."<<endl;
+                    cout<<"--------------------"<<endl;
+                }
+                else if(userChoiceCASI == "3"){  //OPTION 3
+                    
+                    for(int i=0; i <= existingStds.size() - 1 ; i++){
+                        
+                        if(agNumCASI == existingAgNums[i]){
+                            
+                            bool validPass = false;
+                            while(!validPass){
+                                
+                                cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
+                                cout<<"The Current Password of the Student is : "<<existingPasswords[i]<<endl;
+                                
+                                string chngPass;
+                                cout<<"Edit New Password(No Blank Spaces) : ";
+                                cin>>chngPass;
+                                
+                                if(chngPass.length() < 5){
+                                    
+                                    cout<<"Password must contain at least 5 characters. Try Again."<<endl;
+                                    cout<<"--------------------"<<endl;
+                                }
+                                else{
+                                    
+                                    existingPasswords[i] =  chngPass;
+                                    cout<<"Password Updated Successfully."<<endl;
+                                    validPass = true;
+                                    editStdInfoLoop = false;
+                                }
+                            }
+                        }
+                    }
+                    
+                    cout<<"--------------------"<<endl;
+                    cout<<"You are being redirected to the menu."<<endl;
+                    cout<<"--------------------"<<endl;
+                }
+                else if(userChoiceCASI == "4"){
+                    
+                    cout<<"--------------------"<<endl;
+                    cout<<"You are being redirected to the menu."<<endl;
+                    cout<<"--------------------"<<endl;
+                    editStdInfoLoop = false;
+                }
+                else{
+                    
+                    cout<<"Invalid Choice. Try Again."<<endl;
+                }
+            }   //Loop ending here
         }
         
     }
