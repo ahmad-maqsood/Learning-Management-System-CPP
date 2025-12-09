@@ -1,10 +1,11 @@
 /*
 
 Made with Hands.
+Presenters : AHMAD MAQSOOD(2024-ag-8790)  &&  MOIZ AFTAB(2024-ag-9203)  &&  AHMED ILYAS(2024-ag-8958)
 Project Name : Learning Management System
 8 Dec, 2025.
-
-Presenters : AHMAD MAQSOOD(2024-ag-8790)  &&  MOIZ AFTAB(2024-ag-9203)  &&  AHMED ILYAS(2024-ag-8958)
+3rd Semester, Fall 2025.
+CS-409 : Object Oriented Programming.
 
 Students' Recovery Keys : 2024ag8790 , 2024ag9203 , 2024ag8958
 
@@ -14,6 +15,8 @@ Admin's Password(For Login) : CS-409-OOP
 Admin's Forgot Password Function Access AG# : 2021ag2248FP
 Admin's Forgot Password Recovery Key(s) :  iLoveE1, ilovee1, ILoveE1, ILOVEE1
 
+
+Plus Point : 2021ag2248 is the AG# of our Beloved Teacher, Sir Saeed Rasheed, who taught us OOP in Fall 2025 Semester.
 */
 
 #include<iostream>
@@ -634,112 +637,140 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
         
         retryCASI:
         cout<<"----------Edit Students' Info :: Admin Portal----------"<<endl;
+
         string agNumCASI, userChoiceCASI;
-        
+        bool validAgNum = false;
+
         cout<<"Enter the Student's AG# : ";
         cin>>agNumCASI;
-        cout<<"--------------------"<<endl;
-        cout<<"Please select an Option :- "<<endl;
-        cout<<"1. Edit Name."<<endl;
-        cout<<"2. Edit CNIC#."<<endl;
-        cout<<"3. Edit Password."<<endl;
-        cout<<"4. Go back to the Menu."<<endl;
-        cout<<"Input(1-3) : ";
-        cin>>userChoiceCASI;
-        cout<<"--------------------"<<endl;
+
+        for(int i=0; i <= existingStds.size() - 1 ; i++){
+
+            if(agNumCASI == existingAgNums[i]){
+
+                validAgNum = true;
+            }
+                
+        }
+
+        if(!validAgNum){
+
+            cout<<"AG# not found."<<endl;
+            cout<<"--------------------"<<endl;
+            cout<<"You are being redirected to the menu."<<endl;
+            cout<<"--------------------"<<endl;
+        }
+        else if(validAgNum){
+
+            cout<<"--------------------"<<endl;
+            cout<<"Please select an Option :- "<<endl;
+            cout<<"1. Edit Name."<<endl;
+            cout<<"2. Edit CNIC#."<<endl;
+            cout<<"3. Edit Password."<<endl;
+            cout<<"4. Go back to the Menu."<<endl;
+            cout<<"Input(1-3) : ";
+            cin>>userChoiceCASI;
+            cout<<"--------------------"<<endl;
         
-        if(userChoiceCASI == "1"){   //OPTION 1
-            
-            for(int i=0; i <= existingStds.size() - 1 ; i++){
+            if(userChoiceCASI == "1"){   //OPTION 1
                 
-                if(agNumCASI == existingAgNums[i]){
+                for(int i=0; i <= existingStds.size() - 1 ; i++){
                     
-                    cin.ignore();
-                    cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
-                    
-                    string chngName;
-                    cout<<"Edit New Name : ";
-                    getline(cin, chngName);
-                    
-                    existingStds[i] =  chngName;
-                    cout<<"Name Updated Successfully."<<endl;
-                }
-            }
-
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else if(userChoiceCASI == "2"){  //OPTION 2
-            
-            for(int i=0; i <= existingStds.size() - 1 ; i++){
-                
-                if(agNumCASI == existingAgNums[i]){
-                    
-                    retryChngStdCnic:
-                    cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
-                    cout<<"The Current CNIC# of the Student is : "<<existingCnics[i]<<endl;
-                    
-                    string chngCnic;
-                    cout<<"Enter New CNIC# : ";
-                    cin>>chngCnic;
-
-                    if(chngCnic.length() != 13){
-
-                        cout<<"CNIC# must be of 13 digits."<<endl;
-                        cout<<"--------------------"<<endl;
-                        goto retryChngStdCnic;
+                    if(agNumCASI == existingAgNums[i]){
+                        
+                        cin.ignore();
+                        cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
+                        
+                        string chngName;
+                        cout<<"Edit New Name : ";
+                        getline(cin, chngName);
+                        
+                        existingStds[i] =  chngName;
+                        cout<<"Name Updated Successfully."<<endl;
                     }
-                    
-                    existingCnics[i] =  chngCnic;
-                    cout<<"CNIC# Updated Successfully."<<endl;
                 }
-            }
-
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else if(userChoiceCASI == "3"){  //OPTION 3
-            
-            for(int i=0; i <= existingStds.size() - 1 ; i++){
                 
-                if(agNumCASI == existingAgNums[i]){
-                    
-                    retryChngStdPass:
-                    cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
-                    cout<<"The Current Password of the Student is : "<<existingPasswords[i]<<endl;
-                    
-                    string chngPass;
-                    cout<<"Edit New Password(No Blank Spaces) : ";
-                    cin>>chngPass;
-
-                    if(chngPass.length() < 5){
-
-                        cout<<"Password must contain at least 5 characters. Try Again."<<endl;
-                        cout<<"--------------------"<<endl;
-                        goto retryChngStdPass;
-                    }
-                    
-                    existingPasswords[i] =  chngPass;
-                    cout<<"Password Updated Successfully."<<endl;
-                }
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the menu."<<endl;
+                cout<<"--------------------"<<endl;
             }
-
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else if(userChoiceCASI == "4"){
-            
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else{
-            
-            cout<<"Invalid Choice. Try Again."<<endl;
-            goto retryCASI;
+            else if(userChoiceCASI == "2"){  //OPTION 2
+                
+                for(int i=0; i <= existingStds.size() - 1 ; i++){
+                    
+                    if(agNumCASI == existingAgNums[i]){
+                        
+                        bool cnicFormat = false;
+                        
+                        while(!cnicFormat){
+                            
+                            cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
+                            cout<<"The Current CNIC# of the Student is : "<<existingCnics[i]<<endl;
+                            
+                            string chngCnic;
+                            cout<<"Enter New CNIC# : ";
+                            cin>>chngCnic;
+                            
+                            if(chngCnic.length() != 13){
+                                
+                                cout<<"CNIC# must be of 13 digits."<<endl;
+                                cout<<"--------------------"<<endl;
+                            }
+                            else{
+                                
+                                existingCnics[i] =  chngCnic;
+                                cout<<"CNIC# Updated Successfully."<<endl;
+                                cnicFormat = true;
+                            }
+                        }
+                    }
+                }
+                
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the menu."<<endl;
+                cout<<"--------------------"<<endl;
+            }
+            else if(userChoiceCASI == "3"){  //OPTION 3
+                
+                for(int i=0; i <= existingStds.size() - 1 ; i++){
+                    
+                    if(agNumCASI == existingAgNums[i]){
+                        
+                        retryChngStdPass:
+                        cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
+                        cout<<"The Current Password of the Student is : "<<existingPasswords[i]<<endl;
+                        
+                        string chngPass;
+                        cout<<"Edit New Password(No Blank Spaces) : ";
+                        cin>>chngPass;
+                        
+                        if(chngPass.length() < 5){
+                            
+                            cout<<"Password must contain at least 5 characters. Try Again."<<endl;
+                            cout<<"--------------------"<<endl;
+                            goto retryChngStdPass;
+                        }
+                        
+                        existingPasswords[i] =  chngPass;
+                        cout<<"Password Updated Successfully."<<endl;
+                    }
+                }
+                
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the menu."<<endl;
+                cout<<"--------------------"<<endl;
+            }
+            else if(userChoiceCASI == "4"){
+                
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the menu."<<endl;
+                cout<<"--------------------"<<endl;
+            }
+            else{
+                
+                cout<<"Invalid Choice. Try Again."<<endl;
+                goto retryCASI;
+            }
         }
         
     }
