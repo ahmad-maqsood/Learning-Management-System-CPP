@@ -522,7 +522,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
             cout<<"Your Favourite Section in Software Engineering : ";
             cin>>adminTestAns;
             
-            if(adminTestAns == "E2" || adminTestAns == "e2"){
+            if(adminTestAns == "E1" || adminTestAns == "e1"){
                 
                 cout<<"Impressive! Security Procedure Completed."<<endl;
                 cout<<"--------------------"<<endl;
