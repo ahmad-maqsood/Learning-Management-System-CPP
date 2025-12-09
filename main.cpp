@@ -131,7 +131,6 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
         }
             
         bool accExists = false;
-
         for(int i=0; i<= existingStds.size()-1; i++ ){
 
             if(newAccCnic == existingCnics[i]){
@@ -193,47 +192,54 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
     bool existingAccount(){
         
         string inUser, inPass;
-        bool loginSucess = false;
         int loginAttempts = 0; //To count wrong login attempts
+        bool validInfo = false;
+        bool loginSucess = false;
         
-        retryEA:
-        cout<<"----------Login----------"<<endl;
-        
-        cout<<"Username (AG#/CNIC#) : ";
-        getline(cin, inUser);
-        
-        cout<<"Enter your Password : ";
-        getline(cin, inPass);
+        while(!validInfo){
 
-        if(inUser == "" || inPass == ""){
+            cout<<"----------Login----------"<<endl;
+            
+            cout<<"Username (AG#/CNIC#) : ";
+            getline(cin, inUser);
+            
+            cout<<"Enter your Password : ";
+            getline(cin, inPass);
 
-            cout<<"Username and Password are necessary. Try Again."<<endl;
-            goto retryEA;
-        }
+            for(int i=0; i <= existingStds.size() - 1 ; i++){  // -1 >> Because indexes start from 0
     
-        for(int i=0; i <= existingStds.size() - 1 ; i++){  // -1 >> Because indexes start from 0
-
-            if( (inUser == existingAgNums[i] && inPass == existingPasswords[i]) || (inUser == existingCnics[i] && inPass == existingPasswords[i]) ){
-
-                stdName = existingStds[i];
-                stdAgNum = existingAgNums[i];
-                stdCNIC = existingCnics[i];
-                stdPassword = existingPasswords[i];
-                loginSucess = true;
-                cout<<"Login Sucessful!"<<endl;
-                return true;
-                cout<<"--------------------"<<endl;
+                if( (inUser == existingAgNums[i] && inPass == existingPasswords[i]) || (inUser == existingCnics[i] && inPass == existingPasswords[i]) ){
+    
+                    stdName = existingStds[i];
+                    stdAgNum = existingAgNums[i];
+                    stdCNIC = existingCnics[i];
+                    stdPassword = existingPasswords[i];
+                    cout<<"Login Sucessful!"<<endl;
+                    cout<<"--------------------"<<endl;
+                    return true;
+                    // loginSucess = true;
+                    // validInfo = true;
+                }
             }
-        }
-    
-        if(!loginSucess){   //Counts the login attempts and gives the option to reset password or try again
 
-            cout<<"Invalid Credentials. Try Again."<<endl;
-            loginAttempts++;
+            if(loginAttempts < 3){
+                    
+                cout<<"Invalid Credentials."<<endl;
+                loginAttempts++;
+            }
+            if(loginAttempts >= 3){   //See, i want it to stop the loop and display the login fail options after 3 failed attempts. That's why I used if statement instead of else.
+                    
+                break;
+            }
+        }   // Loop ending here
 
-            if(loginAttempts >= 3){  
+        if(loginAttempts >= 3){       
 
-                retryLFC:
+            // retryLFC:
+            bool failedLoginMenu = true;
+
+            while(failedLoginMenu){
+
                 string loginFailChoice;
                 cout<<"--------------------"<<endl;
                 cout<<"Maximum Login Attempts Reached. Please Select an Option :-"<<endl;
@@ -242,84 +248,93 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
                 cout<<"Input(1-2) : ";
                 cin>>loginFailChoice;
                 cout<<"--------------------"<<endl;
-            
-                if(loginFailChoice == "1"){
+                
+                if(loginFailChoice == "1"){    //Option 1
 
-                    retryLFC1:
                     system("cls");
-                    cout<<"----------Forgot Password-----------"<<endl;
-                    bool validAgNum = false;
-                    
-                    string agNumFP,recoveryKey;
-                    cout<<"Enter your AG# : ";
-                    cin>>agNumFP;
-                    
-                    for(int i=0; i <= existingStds.size() - 1; i++){
+                    bool validDetails = false;
+                    while(!validDetails){
+
+                        cout<<"----------Forgot Password-----------"<<endl;
                         
-                        if(agNumFP == existingAgNums[i]){
-                            
-                            validAgNum = true;
-                        }
-                    }
-                    
-                    if(!validAgNum){
-                        
-                        cout<<"Invalid AG#. Please Enter a Valid AG#."<<endl;
-                        goto retryLFC1;
-                    }
-                    
-                    cout<<"Enter the Recovery Key : ";
-                    cin>>recoveryKey;
-                    cout<<"--------------------"<<endl;
-                    
-                    if(recoveryKey == "2024ag8790" || recoveryKey == "2024ag9203"  || recoveryKey == "2024ag8958"){
-                        
-                        retryNewP:
-                        string newPass;
-                        cout<<"Enter New Password(Without Blank Spaces) : ";
-                        cin>>newPass;
-                        
-                        if(newPass.length() < 5){
-                            
-                            cout<<"Password length must be of at least 5 Digits."<<endl;
-                            goto retryNewP;
-                        }
+                        bool validAgNum = false;
+                        string agNumFP,recoveryKey;
+
+                        cout<<"Enter your AG# : ";
+                        cin>>agNumFP;
                         
                         for(int i=0; i <= existingStds.size() - 1; i++){
                             
                             if(agNumFP == existingAgNums[i]){
-
-                                existingPasswords[i] = newPass;
+                                validAgNum = true;
                             }
                         }
-                        cout<<"Password Changed Succesfully."<<endl;
-                        return false;
-                    }
-                    else{
-                    
-                        cout<<"Invalid Recovery Key."<<endl;
-                        return false;
+                        
+                        if(!validAgNum){   
+                            
+                            cout<<"Invalid AG#. Please Enter a Valid AG#."<<endl;
+                        }
+                        else if(validAgNum){
+
+                            bool validRecoveryKey = false;
+                            while(!validRecoveryKey){
+
+                                cout<<"Enter the Recovery Key : ";
+                                cin>>recoveryKey;
+                                cout<<"--------------------"<<endl;
+                                
+                                if(recoveryKey == "2024ag8790" || recoveryKey == "2024ag9203"  || recoveryKey == "2024ag8958"){
+
+                                    validRecoveryKey = true;
+
+                                    bool validNewPass = false;
+                                    while(!validNewPass){
+
+                                        string newPass;
+                                        cout<<"Enter New Password(Without Blank Spaces) : ";
+                                        cin>>newPass;
+                                        
+                                        if(newPass.length() < 5){
+                                            
+                                            cout<<"Password length must be of at least 5 Digits."<<endl;
+                                        }
+                                        else{
+
+                                            for(int i=0; i <= existingStds.size() - 1; i++){
+                                                
+                                                if(agNumFP == existingAgNums[i]){
+                                                    existingPasswords[i] = newPass;
+                                                }
+                                            }
+                                            cout<<"Password Changed Succesfully."<<endl;
+                                            return false;      // It will take user back to the first interface from where the user can select login again.
+                                        }
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                    cout<<"Invalid Recovery Key."<<endl;
+                                    return false;
+                                }
+                            }
+                        }
                     }
                 }
-                else if(loginFailChoice == "2"){
-                
+                else if(loginFailChoice == "2"){   //Option 2
+                    
                     system("cls");
                     return false;
                 }   
-                else{
-                
+                else{      //Invalid Input
+                    
                     cout<<"Invalid Input. Try Again"<<endl;
-                    goto retryLFC;
                     cout<<"--------------------"<<endl;
                 }
             }
-            else{
-   
-                goto retryEA;
-            }
         }
 
-        return false;
+        return false;      //Although it feels unnecessary but there is a reason behind writing this.
     }
 
 };
