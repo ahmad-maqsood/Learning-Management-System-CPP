@@ -20,9 +20,9 @@ Plus Point : 2021ag2248 is the AG# of our Beloved Teacher, Sir Saeed Rasheed, wh
 */
 
 #include<iostream>
-#include<vector>      //For vectors
+#include<vector>      //For Vectors
 #include<cstdlib>    //For Clear Screen  >> system("cls");
-#include<random>
+#include<random>    //For Random Number Generation
 using namespace std;
 
 // Confirm Function
@@ -96,84 +96,96 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     void newAccount(){
 
-        string welUser,welCnic, welPass, welAgNum;
+        string newAccUser,newAccCnic, newAccPass, newAccAgNum;
+        bool validFormat = false;
         
-        retryNA:
-        
-        cout<<"----------Create a New Account----------"<<endl;
-        
-        cout<<"Enter your Name : ";
-        getline(cin, welUser);
-        
-        cout<<"Enter your CNIC# (Without Dashes): ";
-        getline(cin, welCnic);
-        
-        cout<<"--------------------"<<endl;
-        
-        if(welUser == "" || welCnic == ""){
+        while(!validFormat){
 
-            system("cls");
-            cout<<"Name and CNIC# are necessary. Try Again."<<endl;
-            goto retryNA;
-        }
-        else if(welCnic.length() != 13){
+            cout<<"----------Create a New Account----------"<<endl;
             
-            system("cls");
-            cout<<"CNIC# must be of 13 digits. Try Again"<<endl;
-            goto retryNA;
-        }
+            cout<<"Enter your Name : ";
+            getline(cin, newAccUser);
+            cout<<"Enter your CNIC# (Without Dashes): ";
+            getline(cin, newAccCnic);
+            cout<<"--------------------"<<endl;
+            
+            if(newAccUser == "" || newAccCnic == ""){
+                
+                system("cls");
+                cout<<"Name and CNIC# are necessary. Try Again."<<endl;
+            }
+            else if( ((newAccCnic > "a" && newAccCnic < "z") || (newAccCnic > "A" && newAccCnic < "Z" ) ) || (newAccUser > "0" && newAccUser < "9") ){  
+                
+                system("cls");
+                cout<<"Invalid Input Format"<<endl;
+            }
+            else if(newAccCnic.length() != 13){
+                
+                system("cls");
+                cout<<"CNIC# must be of 13 digits. Try Again"<<endl;
+            }
+            else{
 
-        if( ((welCnic > "a" && welCnic < "z") || (welCnic > "A" && welCnic < "Z" ) ) || (welUser > "0" && welUser < "9") ){  
-            
-            system("cls");
-            cout<<"Invalid Input Format"<<endl;
-            goto retryNA;
+                validFormat = true;
+            }
         }
+            
+        bool accExists = false;
 
         for(int i=0; i<= existingStds.size()-1; i++ ){
 
-            if(welCnic == existingCnics[i]){
+            if(newAccCnic == existingCnics[i]){
 
-                system("cls");
-                cout<<"A User by this CNIC# already exists."<<endl;
-                goto accExists;  //At the end of this function
+                accExists = true;
             }
         }
         
-        
-        welAgNum = "2024ag";  //So that the account number starts with "2024ag"
-        for(int i=0; i<=4; i++){  //Random AG no.
+        if(!accExists){
+
+            newAccAgNum = "2024ag";  //So that the account number starts with "2024ag"
+            for(int i=0; i<=4; i++){  //Random AG no.
+                
+                newAccAgNum += strDig[randomIndex()];
+            }
             
-            welAgNum += strDig[randomIndex()];
-        }
-        
-        for(int i=0; i<=4; i++){  //Random Password
-    
-            welPass += strDig[randomIndex()];
-        }
-        
-        existingStds.push_back(welUser);
-        existingCnics.push_back(welCnic);
-        existingAgNums.push_back(welAgNum);
-        existingPasswords.push_back(welPass);
-        
-        studentGPAs.push_back("NO DATA AVAILABLE YET");
-        studentCGPAs.push_back("NO DATA AVAILABLE YET");
-        
-        system("cls");
+            for(int i=0; i<=4; i++){  //Random Password
+                
+                newAccPass += strDig[randomIndex()];
+            }
+            
+            existingStds.push_back(newAccUser);
+            existingCnics.push_back(newAccCnic);
+            existingAgNums.push_back(newAccAgNum);
+            existingPasswords.push_back(newAccPass);
+            
+            studentGPAs.push_back("NO DATA AVAILABLE YET");
+            studentCGPAs.push_back("NO DATA AVAILABLE YET");
+            
+            system("cls");
+            
+            cout<<"--------------------"<<endl;
+            cout<<"Your account has been Created Successfully and your Data has been Updated."<<endl;
+            cout<<"--------------------"<<endl;
+            cout<<"Your Name is : "<<newAccUser<<endl;
+            cout<<"Your CNIC# is : "<<newAccCnic<<endl;
+            cout<<"Your New Ag Number is : "<<newAccAgNum<<endl;
+            cout<<"Your New Password is : "<<newAccPass<<endl;
 
-        cout<<"--------------------"<<endl;
-        cout<<"Your account has been Created Successfully and your Data has been Updated."<<endl;
-        cout<<"--------------------"<<endl;
-        cout<<"Your Name is : "<<welUser<<endl;
-        cout<<"Your CNIC# is : "<<welCnic<<endl;
-        cout<<"Your New Ag Number is : "<<welAgNum<<endl;
-        cout<<"Your New Password is : "<<welPass<<endl;
+            bool returnResult;
+            do{
 
-        accExists:
-        cout<<"--------------------"<<endl;
-        cout<<"You are being redirected to the Previous Page."<<endl;
-        cout<<"--------------------"<<endl;
+                returnResult = confirmReturn();
+            }while(!returnResult);
+            cout<<"--------------------"<<endl;
+        }
+        else if(accExists){
+
+            system("cls");
+            cout<<"--------------------"<<endl;
+            cout<<"A User by this CNIC# already exists."<<endl;
+            cout<<"You are being redirected to the Previous Page."<<endl;
+            cout<<"--------------------"<<endl;
+        }   
     }
     
     //-------------Existing Account(s) Function-------------
@@ -307,6 +319,7 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
             }
         }
 
+        return false;
     }
 
 };
@@ -1135,7 +1148,6 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
     
     //------------- WELCOME PART -------------
     firstInterface:
-    cout<<"----------Welcome to Learning Management System----------"<<endl;
     string userChoiceMF; 
     bool accountAccess = false;
     bool stdPortalAccess = false;
@@ -1143,6 +1155,7 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
     
     while(!accountAccess){
         
+        cout<<"----------Welcome to Learning Management System----------"<<endl;
         cout<<"Select an option : "<<endl;
         cout<<"1. Create a New Account."<<endl;
         cout<<"2. Login to an Existing Account."<<endl;
