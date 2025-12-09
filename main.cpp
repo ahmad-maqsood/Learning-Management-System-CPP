@@ -27,7 +27,7 @@ using namespace std;
 bool confirmReturn() {
 
     string inConfirm;
-    cout << "Press Y to Return: ";
+    cout << "Press Y to Return : ";
     cin >> inConfirm;
 
     if(inConfirm == "Y" || inConfirm == "y"){
@@ -35,7 +35,8 @@ bool confirmReturn() {
         return true;
     }
     else{
-        
+
+        cout<<"Invalid Choice."<<endl;
         return false;
     }
 }
@@ -79,11 +80,13 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
     //-------------Random Index Generator-------------
     int randomIndex(){
 
-        // random_device rd;
-        // mt19937 gen(rd());
-        // uniform_int_distribution<int> randomINDEX(0,9);
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<int> randomINDEX(0,9);
        
-        return rand()%10;   //Generates 0-9 ints.
+        return randomINDEX(gen);   //Generates 0-9 ints.
+
+        // return rand()%10;   //Generates 0-9 ints.
     }
 
     // -------------New Account Function -------------
@@ -754,11 +757,11 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
         
         cout<<"============================================================"<<endl; 
 
-    bool returnResult = confirmReturn();
-    while(!returnResult){
-        cout <<"Invalid Input. Please Press Y."<<endl;
+    bool returnResult;
+    do{
+
         returnResult = confirmReturn();
-    }
+    }while(!returnResult);
 
     cout<<"--------------------"<<endl;
     cout<<"You are being redirected to the menu."<<endl;
@@ -779,56 +782,60 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
     
     void forgotAdminPass(){
         
-        retryFAP:
-        cout<<"----------Recover Admin Password----------"<<endl;
-        string adRecoveryK;
-        cout<<"Enter you Recovery Key : ";
-        cin>>adRecoveryK;
-        cout<<"--------------------"<<endl;
-        
-        if(adRecoveryK == "iLoveE1" || adRecoveryK == "ilovee1" || adRecoveryK == "ILoveE1" || adRecoveryK == "ILOVEE1"){
-            
-            cout<<"We Love you toooooooooooooo"<<endl;
-            retryNewAdmP:
-            string newAdPass;
-            cout<<"Enter the new Password : ";
-            cin>>newAdPass;
+        bool shouldExitRecovery = false;
 
-            if(newAdPass.length() < 8){
+        while(!shouldExitRecovery){
 
-                cout<<"Admin Password Must be of 8 or more characters."<<endl;
-                goto retryNewAdmP;
-            }
-            
-            adminPass = newAdPass;
-            cout<<"Password Changed Successfully."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else{
-            
-            cout<<"*Disappointed*. Ok, here is the guess : iLove--"<<endl;
-            
-            retryACFP:
-            string adChoiceFP;
-            cout<<"Would you like to Retry? Y/N : ";
-            cin>>adChoiceFP;
+            cout<<"----------Recover Admin Password----------"<<endl;
+            string adRecoveryK;
+            cout<<"Enter you Recovery Key : ";
+            cin>>adRecoveryK;
             cout<<"--------------------"<<endl;
             
-            if(adChoiceFP == "Y" || adChoiceFP == "y"){
-                
-                cout<<"Great!"<<endl;
-                goto retryFAP;
-            }
-            else if(adChoiceFP == "n" || adChoiceFP == "n"){
-                
-                cout<<"*Smiling in Pain*"<<endl;
-                cout<<"--------------------"<<endl;
+            if(adRecoveryK == "iLoveE1" || adRecoveryK == "ilovee1" || adRecoveryK == "ILoveE1" || adRecoveryK == "ILOVEE1"){
+
+                cout<<"We Love you toooooooooooooo"<<endl;
+                bool newPassFormat = false;
+
+                while(!newPassFormat){
+
+                    string newAdPass;
+                    cout<<"Enter the new Password : ";
+                    cin>>newAdPass;
+                    
+                    if(newAdPass.length() < 8){
+                        
+                        cout<<"Admin Password Must be of 8 or more Characters."<<endl;
+                    }
+                    else{
+
+                        adminPass = newAdPass;
+                        cout<<"Password Changed Successfully."<<endl;
+                        cout<<"--------------------"<<endl;
+                        newPassFormat = true;
+                        shouldExitRecovery = true;
+                    }
+                }
             }
             else{
-                
-                cout<<"Wrong Input. Please Try Again."<<endl;
+
+                cout<<"*Disappointed*. Ok, here is the guess : iLove--"<<endl;
+
+                string adChoiceFP;
+                cout<<"Press Y to retry, else return to Menu : ";
+                cin>>adChoiceFP;
                 cout<<"--------------------"<<endl;
-                goto retryACFP;
+
+                if(adChoiceFP == "Y" || adChoiceFP == "y"){
+
+                    cout<<"Great!"<<endl;
+                }
+                else{
+
+                    cout<<"*Smiling in Pain*"<<endl;
+                    cout<<"--------------------"<<endl;
+                    shouldExitRecovery = true;
+                }
             }
         }
     }
@@ -866,32 +873,38 @@ class stdPortal : public adminPortal{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STUDENT 
         cout<<"Your CNIC# is : "<<stdCNIC<<endl;
         cout<<"Your Password is : *****"<<endl;
         
-        retrySI:
-        string choiceSI;
-        cout<<"Press R to reveal your Password. N to continue."<<endl;
-        cout<<"Input : ";
-        cin>>choiceSI;
+        bool revealPassEscape = false;
         
-        if(choiceSI == "R" || choiceSI == "r"){
+        while(!revealPassEscape){
+
+            string choiceSI;
+            cout<<"Press R to reveal your Password. N to continue."<<endl;
+            cout<<"Input : ";
+            cin>>choiceSI;
             
-            cout<<"Your Password is : "<<stdPassword<<endl;
-            
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else if(choiceSI == "N" || choiceSI == "n"){
-            
-            cout<<"--------------------"<<endl;
-            cout<<"You are being redirected to the menu."<<endl;
-            cout<<"--------------------"<<endl;
-        }
-        else{
-            cout<<"Invalid Choice. Try Again."<<endl;
-            goto retrySI;
+            if(choiceSI == "R" || choiceSI == "r"){
+
+                cout<<"Your Password is : "<<stdPassword<<endl;
+
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the menu."<<endl;
+                cout<<"--------------------"<<endl;
+                revealPassEscape = true;
+            }
+            else if(choiceSI == "N" || choiceSI == "n"){
+                
+                cout<<"--------------------"<<endl;
+                cout<<"You are being redirected to the menu."<<endl;
+                cout<<"--------------------"<<endl;
+                revealPassEscape = true;
+            }
+            else{
+
+                cout<<"Invalid Choice. Try Again."<<endl;
+            }
         }
     }
-    
+
     //-------------Student's DashBoard Function-------------
     
     void stdDashboard(){
@@ -925,11 +938,11 @@ class stdPortal : public adminPortal{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STUDENT 
             }
         }
         
-        bool returnResult = confirmReturn();
-        while(!returnResult){
-            cout << "Invalid Input. Please Press Y." << endl;
+        bool returnResult;
+        do{
+
             returnResult = confirmReturn();
-        }
+        }while(!returnResult);
         
         
     }
@@ -951,72 +964,72 @@ class stdPortal : public adminPortal{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STUDENT 
             }
         }
 
-        bool returnResult = confirmReturn();
-        while(!returnResult){
-            cout << "Invalid Input. Please Press Y."<<endl;
+        bool returnResult;
+        do{
+
             returnResult = confirmReturn();
-        }
+        }while(!returnResult);
     }
 
     //-------------Change Student's Password Function-------------
     
     void changeStdPass(){
 
-        retryCSP:
         string currentPass, newStdPass;
         bool passChngSuccess = false;
+        bool passChngLoop = true;
         
-        cout<<"----------Change Student's Password----------"<<endl;
-        cout<<"Enter your Previous Password : ";
-        cin>>currentPass;
-        
-        cout<<"Enter new Password : ";
-        cin>>newStdPass;
-        
-        if(newStdPass.length()<5){
+        while(passChngLoop){
 
-            cout<<"Password must contain at least 5 characters. Try Again."<<endl;
-        }
-        else if(currentPass == stdPassword){
+            cout<<"----------Change Student's Password----------"<<endl;
+            cout<<"Enter your Previous Password : ";
+            cin>>currentPass;
             
-            for(int i=0; i<= existingStds.size() -1; i++ ){
+            cout<<"Enter new Password : ";
+            cin>>newStdPass;
+            
+            if(newStdPass.length()<5){
 
-                if(stdAgNum == existingAgNums[i]){
+                cout<<"New Password must contain at least 5 characters. Try Again."<<endl;
+            }
+            else if(currentPass == stdPassword){
 
-                    existingPasswords[i] = newStdPass;
-                    stdPassword = newStdPass;
-                    cout<<"Password Changed Successfully."<<endl; 
-                    passChngSuccess = true;
+                for(int i=0; i<= existingStds.size() -1; i++ ){
+
+                    if(stdAgNum == existingAgNums[i]){
+
+                        existingPasswords[i] = newStdPass;
+                        stdPassword = newStdPass;
+                        cout<<"Password Changed Successfully."<<endl; 
+                        passChngSuccess = true;
+                        passChngLoop = false;
+                    }
                 }
             }
-        }
-        else{
-
-            cout<<"Invalid Current Password. Try Again."<<endl;
-        }
-
-        if(!passChngSuccess){
-
-            string userChoiceCP;
-            cout<<"Press R to retry or M to go back to the Menu"<<endl;
-            cout<<"Input : ";
-            cin>>userChoiceCP;
-            cout<<"--------------------"<<endl;
-            
-            if(userChoiceCP == "R" || userChoiceCP == "r"){
-    
-                goto retryCSP;
-            }
-            else if(userChoiceCP == "M" || userChoiceCP == "m"){
-                
-                cout<<"--------------------"<<endl;
-                cout<<"You are being redirected to the Menu."<<endl;
-                cout<<"--------------------"<<endl;
-            }
             else{
+            
+                cout<<"Invalid Current Password. Try Again."<<endl;
+            }
+
+            if(!passChngSuccess){
+
+                string userChoiceCP;
+                cout<<"Press M to return to Menu, else to retry."<<endl;
+                cout<<"Input : ";
+                cin>>userChoiceCP;
+                cout<<"--------------------"<<endl;
+            
+                if(userChoiceCP == "M" || userChoiceCP == "m"){
                 
-                cout<<"Invalid Input. Try Again."<<endl;
-                goto retryCSP;
+                    cout<<"--------------------"<<endl;
+                    cout<<"You are being redirected to the Menu."<<endl;
+                    cout<<"--------------------"<<endl;
+                    passChngLoop = false;
+                }
+                else{
+                
+                    passChngLoop = true;
+                }
             }
         }
         
@@ -1058,11 +1071,11 @@ class stdPortal : public adminPortal{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STUDENT 
             }
         }
         
-        bool returnResult = confirmReturn();
-        while(!returnResult){
-            cout << "Invalid Input. Please Press Y." << endl;
+        bool returnResult;
+        do{
+
             returnResult = confirmReturn();
-        }
+        }while(!returnResult);
     }
     
     //-------------Student Exit Function-------------
@@ -1113,7 +1126,7 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
             
             string continueChoiceNA;
             cout<<"Do you want to create a New Account?"<<endl;
-            cout<<"Press Y to continue or any other key to go back : ";
+            cout<<"Press Y to Continue, else to go back : ";
             cin>>continueChoiceNA;
             
             if(continueChoiceNA == "Y" || continueChoiceNA == "y"){
