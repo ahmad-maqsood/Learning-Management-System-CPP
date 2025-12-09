@@ -334,7 +334,7 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
             }
         }
 
-        return false;      //Although it feels unnecessary but there is a reason behind writing this.
+        return false; 
     }
 
 };
