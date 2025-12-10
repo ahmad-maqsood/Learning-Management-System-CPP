@@ -16,7 +16,7 @@ Admin's Forgot Password Function Access AG# : 2021ag2248FP
 Admin's Forgot Password Recovery Key(s) :  iLoveE1, ilovee1, ILoveE1, ILOVEE1
 
 
-Plus Point : 2021ag2248 is the AG# of our Beloved Teacher, Sir Saeed Rasheed, who taught us OOP in Fall 2025 Semester.
+Plus Point : 2021ag2248 is the AG# of our Beloved Teacher, Sir Saeed Rasheed, who taught us OOP in Fall 2025 Semester. And E1 is the name of our Section.
 */
 
 #include<iostream>
@@ -380,7 +380,8 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
         cout<<"5. Edit Student's Info."<<endl;
         cout<<"6. Login to Another Account."<<endl;
         cout<<"7. Students we are concerned about."<<endl;
-        cout<<"8. Exit. "<<endl;
+        cout<<"8. Remove a Student."<<endl;
+        cout<<"9. Exit. "<<endl;
         cout<<"--------------------"<<endl;
     }
     
@@ -864,6 +865,61 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
     cout<<"--------------------"<<endl;
     }
     
+    //-------------Admin : Remove a Student Function-------------
+
+    void adminRemStd(){
+
+        cout<<"----------Remove a Student----------"<<endl;
+        string remStdDet;
+        cout<<"Enter the Student's AG#/CNIC# : ";
+        cin>>remStdDet;
+
+        bool validDetails = false;
+        for(int i=0; i<=existingAgNums.size() - 1; i++){
+
+            if(remStdDet == existingAgNums[i] || remStdDet == existingCnics[i]){
+
+                cout<<"The Name of the Student is : "<<existingStds[i]<<endl;
+
+                string confirmDel;
+                cout<<"Press Y to Confirm deletion, else to cancel."<<endl;
+                cout<<"Input : ";
+                cin>>confirmDel;
+
+                if(confirmDel == "Y" || confirmDel == "y"){
+
+                    existingStds.erase( existingStds.begin() + i );
+                    existingCnics.erase( existingCnics.begin() + i );
+                    existingAgNums.erase( existingAgNums.begin() + i );
+                    existingPasswords.erase( existingPasswords.begin() + i );
+                    studentGPAs.erase( studentGPAs.begin() + i );
+                    studentCGPAs.erase( studentCGPAs.begin() + i );
+
+                    cout<<"--------------------"<<endl;
+                    cout<<"Student Data Deleted Successfully."<<endl;
+                    cout<<"You are being redirected to the menu."<<endl;
+                    cout<<"--------------------"<<endl;
+                }
+                else{
+
+                    cout<<"--------------------"<<endl;
+                    cout<<"You are being redirected to the menu."<<endl;
+                    cout<<"--------------------"<<endl;
+                }
+                
+                validDetails = true;
+            }
+        }  // Loop ending
+        
+        if(!validDetails){
+            
+            cout<<"Invalid AG#/CNIC."<<endl;
+            cout<<"--------------------"<<endl;
+            cout<<"You are being redirected to the menu."<<endl;
+            cout<<"--------------------"<<endl;
+        }
+    }
+
     //-------------admin Exit Function-------------
     
     void adminExit(){
@@ -874,7 +930,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
         cout<<"--------------------"<<endl;
     }
 
-    //-------------Forgot Admin Password Function-------------
+    //>>>>>>>>>>>>>>>Forgot Admin Password Function<<<<<<<<<<<<<<<<<<
     
     void forgotAdminPass(){
         
@@ -1366,7 +1422,7 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
             obj.adminPortalMenu();  //Admin Portal Menu
 
             string adminPortalChoice;
-            cout<<"Select an option(1-8) : ";
+            cout<<"Select an option(1-9) : ";
             cin>>adminPortalChoice;
 
             if(adminPortalChoice == "1"){   //OPTION 1  >> Admin Info
@@ -1405,7 +1461,12 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
                 system("cls");
                 obj.concerningFigures();
             }
-            else if(adminPortalChoice == "8"){  //OPTION 8 >> Exit
+            else if(adminPortalChoice == "8"){  //Option 8 >> Remove a Student
+                
+                system("cls");
+                obj.adminRemStd();
+            }
+            else if(adminPortalChoice == "9"){  //OPTION 9 >> Exit
 
                 system("cls");
                 obj.adminExit();
