@@ -25,9 +25,7 @@ Plus Point : 2021ag2248 is the AG# of our Beloved Teacher, Sir Saeed Rasheed, wh
 #include<random>    //For Random Number Generation
 using namespace std;
 
-// Confirm Function
-
-bool confirmReturn() {
+bool confirmReturn() {   // Confirm Function
 
     string inConfirm;
     cout << "Press Y to Return : ";
@@ -50,13 +48,21 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
     string strDig[10] = {"0","1","2","3","4","5","6","7","8","9"};
 
     protected:
+
     //VECTORS=======================================
+
     vector<string> existingStds = {"SAIRA MATLOOB", "ABDUL MOIZ AFTAB", "SALIHA ASHIQ", "MUHAMMAD ADEEL HASSAN", "EMAN FATIMA", "MUHAMMAD HAROON", "MUHAMMAD AHMAD", "AMEER HAMZA", "AMNA JAVID BHATTI", "MUHAMMAD HAMZA SHABBIR", "FURQAN SHABBIR", "MUHAMMAD TAIMOOR KHAN", "MUHAMMAD WAQAR", "MOEEZ UR REHMAN", "MUHAMMAD UZAIR", "MUHAMMAD ABDULLAH", "MARIAM ARSHAD", "SAMEEN AHSAN", "IRA NADEEM", "RUBAB NADEEM", "MARIAM TEHSEEN", "DANIA MEHMOOD", "HAMNA ANEES", "ZARAKSHAN", "MALEEHA MUNAWAR", "PAWAN BATOOL", "AYESHA RAZA", "MUHAMMAD ABDULLAH KHAN", "KASHAF ZAHRA", "AHMAD MAQSOOD", "HAFIZ MUHAMMAD ABDULLAH", "INAAM MUSTAFA", "KASHAF ANWAR", "MUHAMMAD ABDULLAH", "MUHAMMAD ZOHAIB", "SHEHZAD HASSAN", "ZAINAB SHAHZAD", "AHMED ILYAS", "MEER MUHAMMAD MANSHA", "HAFIZ MUHAMMAD FAIZAN", "ESHA IRFAN", "MUHAMMAD HASHIR RAHEEM"};
+
     vector<string> existingAgNums = {"2024ag4879", "2024ag9203", "2024ag5154", "2024ag8341", "2024ag6916", "2024ag7600", "2024ag7870", "2024ag7872", "2024ag7874", "2024ag7876", "2024ag8001", "2024ag8008", "2024ag8010", "2024ag8015", "2024ag8024", "2024ag8027", "2024ag8030", "2024ag8035", "2024ag8110", "2024ag8112", "2024ag8317", "2024ag8327", "2024ag8332", "2024ag8337", "2024ag8339", "2024ag8348", "2024ag8549", "2024ag8550", "2024ag8689", "2024ag8790", "2024ag8797", "2024ag8803", "2024ag8808", "2024ag8834", "2024ag8881", "2024ag8901", "2024ag8953", "2024ag8958", "2024ag9097", "2024ag9173", "2024ag9179", "2023ag10405"};
+
     vector<string> existingCnics = {"3310522123960", "3310227623257", "3310418310596", "3310430943049", "3310049344056", "3310259541743", "3310266053537", "3320261982501", "3550301529494", "3330380168351", "3650182151749", "3330117819833", "3550105779255", "3310215035167", "3330339077055", "3310222936931", "3310207539374", "3310566097828", "3310313070462", "3310507228358", "3310233383602", "3550302375638", "3310064094506", "3310097607578", "3310276102922", "3320258923340", "3320268273360", "3550301965405", "3320399676126", "3650124060861", "3310275627507", "3320506555418", "3310576573824", "3310290611153", "3310024510169", "3310386553901", "4210118319134", "4250150922185", "3540450852005", "3310049530201", "3310208755898", "3310009613441"};
+
     vector<string> existingPasswords = {"10001", "10002", "10003", "10004", "10005", "10006", "10007", "10008", "10009", "10010","10011", "10012", "10013", "10014", "10015", "10016", "10017","10018", "10019", "10020","10021", "10022", "10023", "10024", "10025", "10026", "10027", "10028", "10029", "10030","10031", "10032", "10033", "10034","10035", "10036", "10037", "10038", "10039", "10040","10041", "10042"};
+
     vector<string> studentCGPAs = {"3.02",     "3.33",     "2.65",     "3.19",     "2.9","3.07",     "2.9",     "3.38",     "2.88",     "3.14",  "2.88",     "3.08",     "2.63",     "2.91",     "3.14", "2.9",     "3.24",     "2.64",     "2.89",     "2.87", "3.0",     "2.7",     "3.15",     "3.21",     "3.51", "3.22",     "3.31",     "3.13",     "2.74",     "3.44", "2.04",     "2.97",     "3.2",     "2.87",     "2.62",  "2.91",     "3.64",     "2.9",     "2.21",     "2.9",  "2.6",     "2.2"};
+
     vector<string> studentGPAs = {"2.6",    "3.28",     "2.15",     "2.82",     "2.56", "2.83",     "2.71",     "3.18",     "2.31",     "2.96",  "2.38",     "2.88",     "2.34",     "2.93",     "2.9",  "2.73",     "3.28",     "2.15",     "2.53",     "2.53",  "2.73",     "1.6",     "3.08",     "2.96",     "3.23",  "3.06",     "3.35",     "2.98",     "2.68",     "3.21",  "1.77",     "2.73",     "2.88",     "2.71",     "2.56",  "2.86",     "3.58",     "2.36",     "1.79",     "2.42",  "2.61",     "2.24"};
+    
     vector<string> stdReviews = {
         "He explain concepts, like they make so much more sense. I honestly wish I had a teacher like him in my 1st semester, it would've made my foundation so much stronger. Just one request: right now the pace feels a little fast for me and I want to absorb everything properly.",
         "good",
@@ -72,10 +78,14 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
         "Thank you sir for foresting a passion for coding you taught us how to enjoy the complexity rather than a fear it. you are more than a teacher; you are a mentor who clearly charts the path from theroretical knowledge to industry readness. apki guidance buht qeemti h sir. Thanks sir again",
         "Sir Saeed is a good teacher and give important information about topics"
     };
+
     vector<string> concerningFiguresNames = {"HAROON PRODUCTIONS", "FURQAN HIZRU", "UZAIR NONCHALANT", "FAIZAN DHILLON", "AHMAD BOSS"};
+
     vector<string> concerningFigAgNums = {"2024ag7600", "2024ag8001", "2024ag8024", "2024ag9173", "2024ag7870"};
+
     //Students' Variables
-    string stdName, stdPassword, stdAgNum, stdCNIC;             
+    string stdName, stdPassword, stdAgNum, stdCNIC;
+
     //Admin Variables
     string adminName, adminPass, adminCnic, adminAgNum;
     
@@ -88,7 +98,6 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
         uniform_int_distribution<int> randomINDEX(0,9);
        
         return randomINDEX(gen);   //Generates 0-9 ints.
-
         // return rand()%10;   //Generates 0-9 ints.
     }
 
@@ -262,6 +271,7 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
                         for(int i=0; i <= existingStds.size() - 1; i++){
                             
                             if(agNumFP == existingAgNums[i]){
+
                                 validAgNum = true;
                             }
                         }
@@ -302,6 +312,7 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
                                                     existingPasswords[i] = newPass;
                                                 }
                                             }
+
                                             cout<<"Password Changed Succesfully."<<endl;
                                             return false;      // It will take user back to the first interface from where the user can select login again.
                                         }
@@ -366,8 +377,8 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
     void adminPortalMenu(){
 
         cout<<"-------------Admin Portal-------------"<<endl;
+
         cout<<"Hey "<<adminName<<"!. Welcome to your Admin Portal."<<endl;
-        
         cout<<"Please Select an option to proceed :- "<<endl;
         cout<<"1. See Your Profile Info. "<<endl;
         cout<<"2. View Students' Info."<<endl;
@@ -420,6 +431,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                 passRevealLoop = false;
             }
             else{
+                
                 cout<<"Invalid Input. Try Again."<<endl;
             }
         }
@@ -1251,6 +1263,7 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
     stdPortal obj;
     
     //------------- WELCOME PART -------------
+
     firstInterface:
     string userChoiceMF; 
     bool accountAccess = false;
@@ -1343,6 +1356,7 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
     }
 
     //------------- STUDENT PORTAL -------------
+
     if(stdPortalAccess == true){
 
         bool stdMenuEscape = false;
@@ -1408,6 +1422,7 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
     }
 
     //------------- ADMIN PORTAL -------------
+
     else if(adminPortalAccess == true){
         
         bool adminMenuEscape = false;
