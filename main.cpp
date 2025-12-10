@@ -217,8 +217,6 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
                     cout<<"Login Sucessful!"<<endl;
                     cout<<"--------------------"<<endl;
                     return true;
-                    // loginSucess = true;
-                    // validInfo = true;
                 }
             }
 
@@ -235,9 +233,7 @@ class LMS{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>
 
         if(loginAttempts >= 3){       
 
-            // retryLFC:
             bool failedLoginMenu = true;
-
             while(failedLoginMenu){
 
                 string loginFailChoice;
@@ -457,7 +453,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                     cout<<"Student CNIC# : "<<existingCnics[i]<<" || ";
                     cout<<"Student Password : "<<existingPasswords[i]<<" || ";
                     cout<<"Student AG# : "<<existingAgNums[i]<<" || ";
-                    cout<<"Student GPA(2nd Sem) : "<<studentGPAs[i]<<" || ";
+                    cout<<"Student GPA(Previous Sem) : "<<studentGPAs[i]<<" || ";
                     cout<<"Student CGPA : "<<studentCGPAs[i]<<endl;
                 }
                 cout<<"==========================================================="<<endl;
@@ -486,7 +482,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                         cout<<"Student CNIC# : "<<existingCnics[i]<<" || ";
                         cout<<"Student Password : "<<existingPasswords[i]<<" || ";
                         cout<<"Student AG# : "<<existingAgNums[i]<<" || ";
-                        cout<<"Student GPA(2nd Sem) : "<<studentGPAs[i]<<" || ";
+                        cout<<"Student GPA(Previous Sem) : "<<studentGPAs[i]<<" || ";
                         cout<<"Student CGPA : "<<studentCGPAs[i]<<endl;
                         cout<<"==========================================================="<<endl;
                         stdFound = true;
