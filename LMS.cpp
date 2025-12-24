@@ -268,19 +268,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
 
     int defStudents(){
 
-        int defStudentsCount = 0;
-        for(int i=0; i<=defaultStudents.size() - 1; i++){
-
-            for(int j=0; j<=existingAgNums.size() - 1; j++){
-
-                if(defaultStudents[i] == existingCnics[j]){
-
-                    defStudentsCount++;
-                }
-            }
-        }
-
-        return defStudentsCount;
+        return defaultStudents.size()-1;
     }
 
 };
@@ -1101,6 +1089,10 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
 
                 if(confirmDel == "Y" || confirmDel == "y"){
 
+                    if(i <= defStudents()){
+                        
+                        defaultStudents.erase( defaultStudents.begin() + i );
+                    }
                     existingStds.erase( existingStds.begin() + i );
                     existingCnics.erase( existingCnics.begin() + i );
                     existingAgNums.erase( existingAgNums.begin() + i );
