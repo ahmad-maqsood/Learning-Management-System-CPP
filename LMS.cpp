@@ -911,18 +911,18 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
     
     void editAdStdInfo(){
         
-        string agNumCASI, userChoiceCASI;
+        string acNumCASI, userChoiceCASI;
         bool validAgNum = false;
 
         while(!validAgNum){
 
             cout<<"----------Edit Students' Info :: Admin Portal----------"<<endl;    
-            cout<<"Enter the Student's AG# : ";
-            cin>>agNumCASI;
+            cout<<"Enter the Student's AG#/CNIC# : ";
+            cin>>acNumCASI;
             
             for(int i=0; i <= existingStds.size() - 1 ; i++){
                 
-                if(agNumCASI == existingAgNums[i]){
+                if(acNumCASI == existingAgNums[i] || acNumCASI == existingCnics[i]){
                     validAgNum = true;
                 }
                 
@@ -930,9 +930,6 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
             if(!validAgNum){
                 
                 cout<<"Invalid AG#."<<endl;
-                cout<<"--------------------"<<endl;
-                cout<<"You are being redirected to the menu."<<endl;
-                cout<<"--------------------"<<endl;
             }
         }  // While loop ending here
 
@@ -955,7 +952,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                     
                     for(int i=0; i <= existingStds.size() - 1 ; i++){
                         
-                        if(agNumCASI == existingAgNums[i]){
+                        if(acNumCASI == existingAgNums[i]){
                             
                             cin.ignore();
                             cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
@@ -982,7 +979,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                     
                     for(int i=0; i <= existingStds.size() - 1 ; i++){
                         
-                        if(agNumCASI == existingAgNums[i]){
+                        if(acNumCASI == existingAgNums[i]){
                                 
                             cout<<"The Current Name of the Student is : "<<existingStds[i]<<endl;
                             cout<<"The Current CNIC# of the Student is : "<<existingCnics[i]<<endl;
@@ -1009,7 +1006,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                     
                     for(int i=0; i <= existingStds.size() - 1 ; i++){
                         
-                        if(agNumCASI == existingAgNums[i]){
+                        if(acNumCASI == existingAgNums[i]){
                             
                             bool validPass = false;
                             while(!validPass){
@@ -1065,7 +1062,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
         for(int i=0; i <= concerningFiguresNames.size()-1; i++){
             
             cout<<"=============================="<<i+1<<"============================="<<endl; 
-            cout<<"Name : "<<concerningFiguresNames[i]<<endl;
+            cout<<concerningFiguresNames[i]<<endl;
         }
         
         cout<<"============================================================"<<endl; 
