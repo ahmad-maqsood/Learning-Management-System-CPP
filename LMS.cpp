@@ -128,7 +128,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
     // -------------PUSHING DATA TO VECTORS FROM FILES(Constructor)-------------
     Data(){
 
-        //ADMIN DATA
+        //A)ADMIN DATA
         ifstream inAdminDataFile("DATA/adminData.txt");
         string fileAdminData;
         
@@ -224,12 +224,16 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
     ~Data(){
         
 
-        //SAVE ADMIN DATA
+        //A)SAVE ADMIN DATA
         ofstream outAdminDataFile("DATA/adminData.txt");
         
         for(int i=0; i<=adminData.size() - 1; i++){
             
-            outAdminDataFile<<adminData[i]<<endl;
+            outAdminDataFile<<adminData[i];
+            if(i<adminData.size() - 1){  //So that endl isn't added when the last string is pushed
+
+                outAdminDataFile<<endl;  
+            }
         }
         outAdminDataFile.close();
 
@@ -238,7 +242,11 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
 
         for(int i=0; i<=existingStds.size() - 1; i++){
             
-            outNameFile<<existingStds[i]<<endl;
+            outNameFile<<existingStds[i];
+            if(i<existingStds.size() - 1){
+                
+                outNameFile<<endl;
+            }
         }
         outNameFile.close();
 
@@ -247,7 +255,11 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         
         for(int i=0; i<=existingAgNums.size() - 1; i++){
 
-            outAgNumFile<<existingAgNums[i]<<endl;
+            outAgNumFile<<existingAgNums[i];
+            if(i<existingAgNums.size() - 1){
+                
+                outAgNumFile<<endl;
+            }
         }
         outAgNumFile.close();
 
@@ -256,7 +268,11 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         
         for(int i=0; i<=existingCnics.size() - 1; i++){
 
-            outCnicFile<<existingCnics[i]<<endl;
+            outCnicFile<<existingCnics[i];
+            if(i<existingCnics.size() - 1){
+                
+                outCnicFile<<endl;
+            }
         }
         outCnicFile.close();
 
@@ -265,7 +281,11 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         
         for(int i=0; i<=existingPasswords.size() - 1; i++){
             
-            outPassFile<<existingPasswords[i]<<endl;
+            outPassFile<<existingPasswords[i];
+            if(i<existingPasswords.size() - 1){
+                
+                outPassFile<<endl;
+            }
         }
         outPassFile.close();
         
@@ -274,7 +294,11 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         
         for(int i=0; i<=studentCGPAs.size() - 1; i++){
             
-            outCgpaFile<<studentCGPAs[i]<<endl;
+            outCgpaFile<<studentCGPAs[i];
+            if(i<studentCGPAs.size() - 1){
+                
+                outCgpaFile<<endl;
+            }
         }
         outCgpaFile.close();
         
@@ -283,7 +307,11 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         
         for(int i=0; i<=studentGPAs.size() - 1; i++){
 
-            outGpaFile<<studentGPAs[i]<<endl;
+            outGpaFile<<studentGPAs[i];
+            if(i<studentGPAs.size() - 1){
+                
+                outGpaFile<<endl;
+            }
         }
         outGpaFile.close();
         
@@ -292,7 +320,11 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
 
         for(int i=0; i<=stdReviews.size() - 1; i++){
             
-            outReviewFile<<stdReviews[i]<<endl;
+            outReviewFile<<stdReviews[i];
+            if(i<stdReviews.size() - 1){
+                
+                outReviewFile<<endl;
+            }
         }
         outReviewFile.close();
 
@@ -301,7 +333,11 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
 
         for(int i=0; i<=defaultStudents.size() - 1; i++){
             
-            outDefStdFile<<defaultStudents[i]<<endl;
+            outDefStdFile<<defaultStudents[i];
+            if(i<defaultStudents.size() - 1){
+                
+                outDefStdFile<<endl;
+            }
         }
         outDefStdFile.close();
     }
