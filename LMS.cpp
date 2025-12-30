@@ -121,10 +121,21 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
     string stdName, stdPassword, stdAgNum, stdCNIC;
 
     //Admin Variables
+    vector<string> adminData;
     string adminName, adminPass, adminCnic, adminAgNum;
 
     // -------------PUSHING DATA TO VECTORS FROM FILES(Constructor)-------------
     Data(){
+
+        //ADMIN DATA
+        ifstream inAdminDataFile("DATA/adminData.txt");
+        string fileNames;
+        
+        while(getline(inAdminDataFile, fileNames)){
+            
+            adminData.push_back(fileNames);
+        }
+        inAdminDataFile.close();
 
         //1)Students' Names
         ifstream inNameFile("DATA/studentsNames.txt");
@@ -211,6 +222,17 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
     // -------------Saving Data to Files(Destructor)-------------
     ~Data(){
         
+
+        //SAVE ADMIN DATA
+        ofstream outAdminDataFile("DATA/adminData.txt");
+        string fileNames;
+        
+        for(int i=0; i<=adminData.size() - 1; i++){
+            
+            outAdminDataFile<<adminData[i]<<endl;
+        }
+        outAdminDataFile.close();
+
         //1)Save Students' Names
         ofstream outNameFile("DATA/studentsNames.txt");
 
@@ -581,10 +603,10 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
 
     adminPortal(){
 
-        adminName = "Saeed Rasheed";
-        adminPass = "CS-409-OOP";
-        adminCnic = "xxxxxxxxxxxxx";
-        adminAgNum = "2021ag2248";
+        adminName = adminData[0];
+        adminCnic = adminData[1];
+        adminPass = adminData[2];
+        adminAgNum = adminData[3];
     }
     
     //-------------Admin Account Login Function-------------
@@ -843,6 +865,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
 
                     nameToUpperCase(newName);
                     adminName = newName;
+                    adminData[0] = newName;
                     cout<<"Name Updated Successfully."<<endl;
                     adminInfEditMenuLoop = false;
                 }
@@ -867,6 +890,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                 if(validCnic){
                     
                     adminCnic = newCnic;
+                    adminData[1] = newCnic;
                     cout<<"CNIC# Updated Successfully."<<endl;
                     adminInfEditMenuLoop = false;
                 }
@@ -896,7 +920,8 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                     }
                     else{
                         
-                        adminPass = newPass;   
+                        adminPass = newPass;
+                        adminData[2] = newPass; 
                         cout<<"Password Updated Successfully."<<endl;
                         validPass = true;
                         adminInfEditMenuLoop = false;
