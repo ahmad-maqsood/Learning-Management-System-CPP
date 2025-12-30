@@ -129,11 +129,11 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
 
         //ADMIN DATA
         ifstream inAdminDataFile("DATA/adminData.txt");
-        string fileNames;
+        string fileAdminData;
         
-        while(getline(inAdminDataFile, fileNames)){
+        while(getline(inAdminDataFile, fileAdminData)){
             
-            adminData.push_back(fileNames);
+            adminData.push_back(fileAdminData);
         }
         inAdminDataFile.close();
 
@@ -225,7 +225,6 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
 
         //SAVE ADMIN DATA
         ofstream outAdminDataFile("DATA/adminData.txt");
-        string fileNames;
         
         for(int i=0; i<=adminData.size() - 1; i++){
             
