@@ -62,7 +62,6 @@ bool chkValidName(string name){
             return false;
         }
     }
-
     return true;
 }
 
@@ -1081,13 +1080,13 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
 
         cout<<"----------Remove a Student----------"<<endl;
         string remStdDet;
-        cout<<"Enter the Student's AG#/CNIC# : ";
+        cout<<"Enter the Student's CNIC# : ";
         cin>>remStdDet;
 
         bool validDetails = false;
         for(int i=0; i<=existingAgNums.size() - 1; i++){
 
-            if(remStdDet == existingAgNums[i] || remStdDet == existingCnics[i]){
+            if(remStdDet == existingCnics[i]){
 
                 cout<<"The Name of the Student is : "<<existingStds[i]<<endl;
 
@@ -1127,7 +1126,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
         
         if(!validDetails){
             
-            cout<<"Invalid AG#/CNIC."<<endl;
+            cout<<"Invalid CNIC#."<<endl;
             cout<<"--------------------"<<endl;
             cout<<"You are being redirected to the menu."<<endl;
             cout<<"--------------------"<<endl;
