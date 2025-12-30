@@ -262,13 +262,22 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
             outReviewFile<<stdReviews[i]<<endl;
         }
         outReviewFile.close();
+
+        // 8) Save Default Students
+        ofstream outDefStdFile("DATA/defStudents.txt");
+
+        for(int i=0; i<=defaultStudents.size() - 1; i++){
+            
+            outDefStdFile<<defaultStudents[i]<<endl;
+        }
+        outDefStdFile.close();
     }
     
     // -------------Default Students Number-------------
 
     int defStudents(){
 
-        return defaultStudents.size()-1;
+        return defaultStudents.size();
     }
 
 };
@@ -1089,7 +1098,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
 
                 if(confirmDel == "Y" || confirmDel == "y"){
 
-                    if(i <= defStudents()){
+                    if(i < defStudents()){
                         
                         defaultStudents.erase( defaultStudents.begin() + i );
                     }
