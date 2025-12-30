@@ -1,6 +1,7 @@
 /*
-ACCOUNTS CANNOT BE ACCESSED USING AG NUMBERS. THEY CAN BE ACCESSED USING CNIC NUMBER BUT YOU MUST USE ASTERIKS(*) INSTEAD OF LAST 6 DIGITS OF THE CNIC#. AS : 3650124******
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^IMPORTANT^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Already Existing Data : Just type the first 7 digits of the CNIC# as Username.  As : 3650124
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Made with Hands.
 Presenters : AHMAD MAQSOOD(2024-ag-8790)  &&  MOIZ AFTAB(2024-ag-9203)  &&  AHMED ILYAS(2024-ag-8958)
