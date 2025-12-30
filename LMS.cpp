@@ -692,7 +692,6 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
     void adminStudentsInfo(){
         
         bool stdInfMenuLoop = true;
-        retryASI:
         while(stdInfMenuLoop){
 
             cout<<"----------View Students' Info----------"<<endl;
@@ -1214,6 +1213,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                     else{
 
                         adminPass = newAdPass;
+                        adminData[2] = newAdPass;
                         cout<<"Password Changed Successfully."<<endl;
                         cout<<"--------------------"<<endl;
                         newPassFormat = true;
