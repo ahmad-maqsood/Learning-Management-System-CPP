@@ -87,6 +87,18 @@ bool chkValidCNIC(string CNIC){
     return true;
 }
 
+// -------------nameToUpperCase FUNCTION-------------
+
+void nameToUpperCase(string &name){
+
+    for(int i=0; i<name.size(); i++){
+
+        if(!isspace(name[i])){
+            name[i] = toupper(name[i]);
+        }
+    }
+}
+
 class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     
     public:
@@ -323,7 +335,8 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
                 bool validCnic = chkValidCNIC(newAccCnic);
                 
                 if(validName && validCnic){
-    
+                    
+                    nameToUpperCase(newAccUser);
                     validFormat = true;
                 }
             }
@@ -828,6 +841,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                 bool validName = chkValidName(newName);
                 if(validName){
 
+                    nameToUpperCase(newName);
                     adminName = newName;
                     cout<<"Name Updated Successfully."<<endl;
                     adminInfEditMenuLoop = false;
@@ -960,6 +974,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                             bool validName = chkValidName(chngName);
                             if(validName){
 
+                                nameToUpperCase(chngName);
                                 existingStds[i] =  chngName;
                                 cout<<"Name Updated Successfully."<<endl;
                                 editStdInfoLoop = false;
