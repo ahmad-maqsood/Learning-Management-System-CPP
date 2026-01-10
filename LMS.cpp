@@ -35,11 +35,11 @@ using namespace std;
 
 // -------------Confirm Function-------------
 
-bool confirmReturn() { 
+bool confirmReturn(){ 
 
     string inConfirm;
-    cout << "Press Y to Return : ";
-    cin >> inConfirm;
+    cout<<"Press Y to Return : ";
+    cin>>inConfirm;
 
     if(inConfirm == "Y" || inConfirm == "y"){
 
