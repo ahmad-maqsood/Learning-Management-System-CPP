@@ -5,7 +5,8 @@ A robust, console-based **Learning Management System** developed in C++ using ad
 ---
 
 ## 👥 Developers & Course Info
-* **Presenters:** * Ahmad Maqsood (2024-AG-8790)
+* **Presenters:**
+    * Ahmad Maqsood (2024-AG-8790)
     * Moiz Aftab (2024-AG-9203)
     * Ahmed Ilyas (2024-AG-8958)
 * **Course:** CS-409: Object-Oriented Programming (Fall 2025)
