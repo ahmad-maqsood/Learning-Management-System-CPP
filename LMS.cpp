@@ -27,11 +27,19 @@ Plus Point : 2021ag2248 is the AG# of our beloved teacher, Sir Saeed Rasheed, wh
 
 #include<iostream>
 #include<vector>      //For Vectors
-#include<cstdlib>    //For Clear Screen  >> system("cls");
+#include<cstdlib>    //For Clear Screen  >> clearScreen();
 #include<random>    //For Random Number Generation
 #include<fstream>  //For File Handling
 #include<cctype>  //For isdigit()
 using namespace std;
+
+void clearScreen(){
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
 
 // -------------Confirm Function-------------
 
@@ -55,7 +63,7 @@ bool confirmReturn(){
 
 bool chkValidName(string name){
 
-    for(int i=0; i<=name.length() - 1; i++){
+    for(int i=0; i<name.length(); i++){
 
         if(!isalpha(name[i]) && !isspace(name[i])){
             
@@ -76,7 +84,7 @@ bool chkValidCNIC(string CNIC){
         return false;
     }
 
-    for(int i=0; i<=CNIC.length() - 1; i++){
+    for(int i=0; i<CNIC.length(); i++){
 
         if(!isdigit(CNIC[i])){
 
@@ -227,7 +235,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         //A)SAVE ADMIN DATA
         ofstream outAdminDataFile("DATA/adminData.txt");
         
-        for(int i=0; i<=adminData.size() - 1; i++){
+        for(int i=0; i<adminData.size(); i++){
             
             outAdminDataFile<<adminData[i];
             if(i<adminData.size() - 1){  //So that endl isn't added when the last string is pushed
@@ -240,7 +248,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         //1)Save Students' Names
         ofstream outNameFile("DATA/studentsNames.txt");
 
-        for(int i=0; i<=existingStds.size() - 1; i++){
+        for(int i=0; i<existingStds.size(); i++){
             
             outNameFile<<existingStds[i];
             if(i<existingStds.size() - 1){
@@ -253,7 +261,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         //2)Save Students' AG#s
         ofstream outAgNumFile("DATA/studentsAgNums.txt");
         
-        for(int i=0; i<=existingAgNums.size() - 1; i++){
+        for(int i=0; i<existingAgNums.size(); i++){
 
             outAgNumFile<<existingAgNums[i];
             if(i<existingAgNums.size() - 1){
@@ -266,7 +274,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         //3)Save Students' CNICs
         ofstream outCnicFile("DATA/studentsCnics.txt");
         
-        for(int i=0; i<=existingCnics.size() - 1; i++){
+        for(int i=0; i<existingCnics.size(); i++){
 
             outCnicFile<<existingCnics[i];
             if(i<existingCnics.size() - 1){
@@ -279,7 +287,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         //4)Save Students' Passwords
         ofstream outPassFile("DATA/studentsPasswords.txt");
         
-        for(int i=0; i<=existingPasswords.size() - 1; i++){
+        for(int i=0; i<existingPasswords.size(); i++){
             
             outPassFile<<existingPasswords[i];
             if(i<existingPasswords.size() - 1){
@@ -292,7 +300,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         //5)Save Students' CGPAs
         ofstream outCgpaFile("DATA/studentsCGPAs.txt");
         
-        for(int i=0; i<=studentCGPAs.size() - 1; i++){
+        for(int i=0; i<studentCGPAs.size(); i++){
             
             outCgpaFile<<studentCGPAs[i];
             if(i<studentCGPAs.size() - 1){
@@ -305,7 +313,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         //6)Save Students' GPAs
         ofstream outGpaFile("DATA/studentsGPAs.txt");
         
-        for(int i=0; i<=studentGPAs.size() - 1; i++){
+        for(int i=0; i<studentGPAs.size(); i++){
 
             outGpaFile<<studentGPAs[i];
             if(i<studentGPAs.size() - 1){
@@ -318,7 +326,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         // 7) Save Students' Reviews
         ofstream outReviewFile("DATA/studentsReviews.txt");
 
-        for(int i=0; i<=stdReviews.size() - 1; i++){
+        for(int i=0; i<stdReviews.size(); i++){
             
             outReviewFile<<stdReviews[i];
             if(i<stdReviews.size() - 1){
@@ -331,7 +339,7 @@ class Data{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DATA CLASS>>>>>>>>>>>>>>>>>>>>>>>
         // 8) Save Default Students
         ofstream outDefStdFile("DATA/defStudents.txt");
 
-        for(int i=0; i<=defaultStudents.size() - 1; i++){
+        for(int i=0; i<defaultStudents.size(); i++){
             
             outDefStdFile<<defaultStudents[i];
             if(i<defaultStudents.size() - 1){
@@ -384,7 +392,7 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
             
             if(newAccUser == "" || newAccCnic == ""){
                 
-                system("cls");
+                clearScreen();
                 cout<<"Name and CNIC# are necessary. Try Again."<<endl;
             }
             else{
@@ -402,7 +410,7 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
         }
             
         bool accExists = false;
-        for(int i=0; i<= existingStds.size()-1; i++ ){
+        for(int i=0; i< existingStds.size(); i++ ){
 
             if(newAccCnic == existingCnics[i]){
 
@@ -412,7 +420,7 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
 
         if(accExists){
 
-            system("cls");
+            clearScreen();
             cout<<"--------------------"<<endl;
             cout<<"A User by this CNIC# already exists."<<endl;
             cout<<"You are being redirected to the Previous Page."<<endl;
@@ -430,7 +438,7 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
                     newAccAgNum += strDig[randomIndex()];
                 }
 
-                for(int i=0; i<=existingAgNums.size() - 1; i++){
+                for(int i=0; i<existingAgNums.size(); i++){
 
                     if(newAccAgNum == existingAgNums[i]){
                         validAgNum = false;
@@ -451,7 +459,7 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
             studentGPAs.push_back("NO DATA AVAILABLE YET");
             studentCGPAs.push_back("NO DATA AVAILABLE YET");
             
-            system("cls");
+            clearScreen();
             
             cout<<"--------------------"<<endl;
             cout<<"Your account has been Created Successfully and your Data has been Updated."<<endl;
@@ -489,7 +497,7 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
             cout<<"Enter your Password : ";
             getline(cin, inPass);
 
-            for(int i=0; i <= existingStds.size() - 1 ; i++){  // -1 >> Because indexes start from 0
+            for(int i=0; i < existingStds.size() ; i++){  // -1 >> Because indexes start from 0
     
                 if( (inUser == existingAgNums[i] && inPass == existingPasswords[i]) || (inUser == existingCnics[i] && inPass == existingPasswords[i]) ){
     
@@ -537,7 +545,7 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
                 
                 if(loginFailChoice == "1"){    //Option 1
 
-                    system("cls");
+                    clearScreen();
                     bool validDetails = false;
                     while(!validDetails){
 
@@ -549,7 +557,7 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
                         cout<<"Enter your AG# : ";
                         cin>>agNumFP;
                         
-                        for(int i=0; i <= existingStds.size() - 1; i++){
+                        for(int i=0; i < existingStds.size(); i++){
                             
                             if(agNumFP == existingAgNums[i]){
 
@@ -587,7 +595,7 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
                                         }
                                         else{
 
-                                            for(int i=0; i <= existingStds.size() - 1; i++){
+                                            for(int i=0; i < existingStds.size(); i++){
                                                 
                                                 if(agNumFP == existingAgNums[i]){
                                                     existingPasswords[i] = newPass;
@@ -611,7 +619,7 @@ class LMS : public Data{ //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LMS CLASS>>>>>>>>>>>>
                 }
                 else if(loginFailChoice == "2"){   //Option 2
                     
-                    system("cls");
+                    clearScreen();
                     return false;
                 }   
                 else{      //Invalid Input
@@ -744,7 +752,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
             
             if(choiceASI == "1"){
                 
-                for(int i=0; i<= existingStds.size() - 1 ; i++){
+                for(int i=0; i< existingStds.size() ; i++){
                     
                     cout<<"================Student # "<<i+1<<"================"<<endl;
                     cout<<"Student Name : "<<existingStds[i]<<" || ";
@@ -771,7 +779,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                 
                 bool stdFound = false;
                 
-                for(int i=0; i <= existingStds.size() - 1 ; i++){
+                for(int i=0; i < existingStds.size() ; i++){
                     
                     if(userChoiceASI == existingCnics[i] || userChoiceASI == existingAgNums[i]){
                         
@@ -822,7 +830,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
         
         if(stdReviews.size() > 0){
             
-            for(int i=0; i <= stdReviews.size()-1 ; i++){
+            for(int i=0; i < stdReviews.size() ; i++){
                 
                 cout<<"================Review # "<<i+1<<"================"<<endl;
                 cout<<"Message : "<<stdReviews[i]<<endl;
@@ -990,7 +998,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
             cout<<"Enter the Student's AG#/CNIC# : ";
             cin>>acNumCASI;
             
-            for(int i=0; i <= existingStds.size() - 1 ; i++){
+            for(int i=0; i < existingStds.size() ; i++){
                 
                 if(acNumCASI == existingAgNums[i] || acNumCASI == existingCnics[i]){
                     validAgNum = true;
@@ -1020,7 +1028,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                 
                 if(userChoiceCASI == "1"){   //OPTION 1
                     
-                    for(int i=0; i <= existingStds.size() - 1 ; i++){
+                    for(int i=0; i < existingStds.size() ; i++){
                         
                         if(acNumCASI == existingAgNums[i]){
                             
@@ -1048,7 +1056,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                 }
                 else if(userChoiceCASI == "2"){  //OPTION 2
                     
-                    for(int i=0; i <= existingStds.size() - 1 ; i++){
+                    for(int i=0; i < existingStds.size() ; i++){
                         
                         if(acNumCASI == existingAgNums[i]){
                                 
@@ -1075,7 +1083,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
                 }
                 else if(userChoiceCASI == "3"){  //OPTION 3
                     
-                    for(int i=0; i <= existingStds.size() - 1 ; i++){
+                    for(int i=0; i < existingStds.size() ; i++){
                         
                         if(acNumCASI == existingAgNums[i]){
                             
@@ -1130,7 +1138,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
     void concerningFigures(){
         cout<<"----------Conerning Figures of the Class----------"<<endl;
 
-        for(int i=0; i <= concerningFiguresNames.size()-1; i++){
+        for(int i=0; i < concerningFiguresNames.size(); i++){
             
             cout<<"=============================="<<i+1<<"============================="<<endl; 
             cout<<concerningFiguresNames[i]<<endl;
@@ -1159,7 +1167,7 @@ class adminPortal : public LMS{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ADMIN PORTAL C
         cin>>remStdDet;
 
         bool validDetails = false;
-        for(int i=0; i<=existingAgNums.size() - 1; i++){
+        for(int i=0; i<existingAgNums.size(); i++){
 
             if(remStdDet == existingCnics[i]){
 
@@ -1351,7 +1359,7 @@ class stdPortal : public adminPortal{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STUDENT 
     void stdDashboard(){
 
         cout<<"----------Student Dashboard----------"<<endl;
-        for(int i=0; i<=existingStds.size()-1; i++){
+        for(int i=0; i<existingStds.size(); i++){
             
             if(stdAgNum == existingAgNums[i]){
 
@@ -1394,7 +1402,7 @@ class stdPortal : public adminPortal{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STUDENT 
         
         cout<<"----------Student Result----------"<<endl;
         
-        for(int i=0; i <= existingStds.size() - 1; i++){
+        for(int i=0; i < existingStds.size(); i++){
             
             if(stdAgNum == existingAgNums[i]){
                 
@@ -1435,7 +1443,7 @@ class stdPortal : public adminPortal{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STUDENT 
             }
             else if(currentPass == stdPassword){
 
-                for(int i=0; i<= existingStds.size() -1; i++ ){
+                for(int i=0; i< existingStds.size(); i++ ){
 
                     if(stdAgNum == existingAgNums[i]){
 
@@ -1482,7 +1490,7 @@ class stdPortal : public adminPortal{  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STUDENT 
         
         cout<<"----------SUBMIT REVIEWS----------"<<endl;
         
-        for(int i=0; i<=existingStds.size()-1;i++){
+        for(int i=0; i<existingStds.size();i++){
 
             if(stdAgNum == existingAgNums[i]){
 
@@ -1556,7 +1564,7 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
         cout<<"Input(1-3) : ";
         cin>>userChoiceMF;
         
-        system("cls");
+        clearScreen();
         
         if(userChoiceMF == "1"){
             
@@ -1647,44 +1655,44 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
 
             if( stdPortalChoice == "1"){   //OPTION 1  >> Student Info
                 
-                system("cls");
+                clearScreen();
                 obj.stdInfo();
             }
             else if(stdPortalChoice == "2"){   //OPTION 2  >> Dashboard
                 
-                system("cls");
+                clearScreen();
                 obj.stdDashboard();
             }
             else if(stdPortalChoice == "3"){  //OPTION 3  >> Result
                 
-                system("cls");
+                clearScreen();
                 obj.stdResult();
             }
             else if(stdPortalChoice == "4"){  //Option 4 >> Change Password
                 
-                system("cls");
+                clearScreen();
                 obj.changeStdPass();
             }
             else if(stdPortalChoice == "5"){  //OPTION 5 >> teacher/course reviews
 
-                system("cls");
+                clearScreen();
                 obj.stdCourseRevs();
             }
             else if(stdPortalChoice == "6"){  //OPTION 6 >> Login to another account
                 
-                system("cls");
+                clearScreen();
                 stdMenuEscape = true;
                 loginAnotherAcc = true;
             }
             else if(stdPortalChoice == "7"){   //OPTION 7  >> Exit
                 
-                system("cls");
+                clearScreen();
                 obj.stdExit();
                 stdMenuEscape = true;
             }
             else{  //Invalid Option
                 
-                system("cls");
+                clearScreen();
                 cout<<"Invalid Option. Try Again."<<endl;
                 cout<<"--------------------"<<endl;
             }
@@ -1713,54 +1721,54 @@ int main(){   //<<<<<<<<<<<<<<<<<<<int main()>>>>>>>>>>>>>>>>>>>>>>>
 
             if(adminPortalChoice == "1"){   //OPTION 1  >> Admin Info
                 
-                system("cls");
+                clearScreen();
                 obj.adminInfo();
             }
             else if(adminPortalChoice == "2"){   //OPTION 2  >> View Students' Info.
                 
-                system("cls");
+                clearScreen();
                 obj.adminStudentsInfo();
             }
             else if(adminPortalChoice == "3"){  //OPTION 3  >> See Course /Teacher's Reviews
                 
-                system("cls");
+                clearScreen();
                 obj.admViewRevs();
             }
             else if(adminPortalChoice == "4"){  //Option 4 >> Edit Admin's Info
                 
-                system("cls");
+                clearScreen();
                 obj.editAdminInfo();
             }
             else if(adminPortalChoice == "5"){   //OPTION 5  >> Edit Students' Info.
                 
-                system("cls");
+                clearScreen();
                 obj.editAdStdInfo();
             }
             else if(adminPortalChoice == "6"){  //OPTION 6 >> Login to another account
                 
-                system("cls");
+                clearScreen();
                 adminMenuEscape = true;
                 loginAnotherAcc = true;
             }
             else if(adminPortalChoice == "7"){  //OPTION 7 >> Concerning Figures
 
-                system("cls");
+                clearScreen();
                 obj.concerningFigures();
             }
             else if(adminPortalChoice == "8"){  //Option 8 >> Remove a Student
                 
-                system("cls");
+                clearScreen();
                 obj.adminRemStd();
             }
             else if(adminPortalChoice == "9"){  //OPTION 9 >> Exit
 
-                system("cls");
+                clearScreen();
                 obj.adminExit();
                 adminMenuEscape = true;
             }
             else{   //Invalid Option   
                 
-                system("cls");
+                clearScreen();
                 cout<<"Invalid Option. Try Again."<<endl;
                 cout<<"--------------------"<<endl;
             }
