@@ -342,7 +342,7 @@ This is an academic project for educational purposes. For questions or improveme
 
 ## License
 
-This project is provided as-is for educational purposes at FAST-NUCES. See individual file headers for authorship details.
+This project is provided as-is for educational purposes at University of Agriculture, Faisalabad. See individual file headers for authorship details.
 
 ---
 
@@ -356,5 +356,3 @@ This project is provided as-is for educational purposes at FAST-NUCES. See indiv
 ---
 
 *Developed with ❤️ by the BSSE-E1 Team during Fall 2025*
-
-**Last Updated:** February 2026
